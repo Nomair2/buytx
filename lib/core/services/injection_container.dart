@@ -1,0 +1,12 @@
+import 'package:get_it/get_it.dart';
+import 'package:marabh/core/common/singletons/cache_helper.dart';
+import 'package:marabh/src/auth/data/repository/auth_repository_imp.dart';
+import 'package:marabh/src/auth/data/source/auth_remote_data_source.dart';
+import 'package:marabh/src/auth/domain/repository/auth_repository.dart';
+import 'package:marabh/src/auth/domain/usercase/login.dart';
+import 'package:marabh/src/auth/domain/usercase/signup.dart';
+import 'package:marabh/src/auth/domain/usercase/verify_account.dart';
+import 'package:marabh/src/auth/domain/usercase/verify_otp.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
+part 'injection_container.main.dart';
