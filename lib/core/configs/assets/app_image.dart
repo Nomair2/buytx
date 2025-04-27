@@ -4,6 +4,7 @@ class AppImage {
   static const loginImage = '${basePath}login_image$pngFormat';
   static const signupImage = '${basePath}signup_image$pngFormat';
   static const phoneImage = '${basePath}phone_image$pngFormat';
+  static const profileBg = '${basePath}profile_bg$pngFormat';
   static const forgetPasswordImage = '${basePath}forgetPassword$pngFormat';
   static const newPasswordImage = '${basePath}newPassword$pngFormat';
   static const logo = '${basePath}logo$pngFormat';

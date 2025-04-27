@@ -7,8 +7,10 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: '/',
       name: 'splash',
-      builder: (context, state) => SplashPage(),
+      // builder: (context, state) => SplashPage(),
+      builder: (context, state) => ProfileView(),
     ),
+    //---
     GoRoute(
       path: '/auth/phone',
       name: 'phone',
@@ -21,27 +23,32 @@ final GoRouter router = GoRouter(
         return PhonePage(user);
       },
     ),
+    //----
     GoRoute(
       path: '/auth/login',
       name: 'login',
       builder: (context, state) => LoginPage(),
     ),
+    //----
     GoRoute(
       path: '/auth/signup',
       name: 'register',
       builder: (context, state) => SignupPage(),
     ),
+    //-----
     GoRoute(
       path: '/auth/forgot-password',
       name: 'forgot-password',
       builder: (context, state) => const ForgetPasswordPage(),
     ),
+    //-----
     GoRoute(
       path: '/auth/verify-otp',
       name: 'verify-otp',
       builder: (context, state) =>
           VerificationCodePage(email: state.extra as String),
     ),
+    //----
     GoRoute(
       // path: '/auth/reset-password/:token',
       path: '/auth/new-password',
@@ -50,6 +57,37 @@ final GoRouter router = GoRouter(
         // final token = state.pathParameters['token']!;
         // return ResetPasswordPage(token: token);
         return NewPasswordPage();
+      },
+    ),
+    //----
+    // GoRoute(
+    //   path: '/profile',
+    //   name: "profile",
+    //   builder: (context, state) => const ProfileView(),
+    // ),
+    //-----
+    // GoRoute(
+    //   path: '/user_info_tab',
+    //   name: "user_info_tab",
+    //   builder: (context, state) => const UserInfoTab(),
+    // ),
+    GoRoute(
+      path: '/create_window',
+      name: 'create_window',
+      builder: (context, state) {
+        // final token = state.pathParameters['token']!;
+        // return ResetPasswordPage(token: token);
+        return CreateWindow();
+      },
+    ),
+    //---
+    GoRoute(
+      path: '/edit_password',
+      name: 'edit_password',
+      builder: (context, state) {
+        // final token = state.pathParameters['token']!;
+        // return ResetPasswordPage(token: token);
+        return const EditPasswordScreen();
       },
     ),
   ],

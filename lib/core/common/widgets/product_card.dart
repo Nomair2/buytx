@@ -59,12 +59,12 @@ class ProductCard extends StatelessWidget {
                     onTap: () {},
                     child: Container(
                       // width: 35,
-                      padding: EdgeInsets.all(5),
+                      padding: const EdgeInsets.all(5),
                       // height: 35,
                       decoration: BoxDecoration(
                           color: Colors.white.withOpacity(0.5),
                           borderRadius: BorderRadius.circular(90)),
-                      child: Center(
+                      child: const Center(
                         child: Icon(
                           Icons.favorite_border,
                           color: Colors.red,
@@ -81,10 +81,10 @@ class ProductCard extends StatelessWidget {
                     decoration: BoxDecoration(
                         gradient: LinearGradient(colors: [
                       // Colors.white,
-                      Color(0xffF6921E).withOpacity(0),
-                      Color(0xffF6921E),
+                      const Color(0xffF6921E).withOpacity(0),
+                      const Color(0xffF6921E),
                     ], begin: Alignment.topCenter, end: Alignment.bottomRight)),
-                    child: Text(
+                    child: const Text(
                       'Homs',
                       textAlign: TextAlign.end,
                       style: TextStyle(
@@ -101,10 +101,10 @@ class ProductCard extends StatelessWidget {
                     decoration: BoxDecoration(
                         gradient: LinearGradient(colors: [
                       // Colors.white,
-                      Color(0xff72B745),
-                      Color(0xff72B745).withOpacity(0),
+                      const Color(0xff72B745),
+                      const Color(0xff72B745).withOpacity(0),
                     ], begin: Alignment.topCenter, end: Alignment.bottomRight)),
-                    child: Text(
+                    child: const Text(
                       ' iphone 16 ',
                       textAlign: TextAlign.start,
                       style: TextStyle(
@@ -118,7 +118,7 @@ class ProductCard extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(top: 10, right: 10, left: 10),
+            padding: const EdgeInsets.only(top: 10, right: 10, left: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -131,11 +131,11 @@ class ProductCard extends StatelessWidget {
                         Container(
                           width: 60,
                           height: 24,
-                          padding: EdgeInsets.symmetric(horizontal: 10),
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
                           decoration: BoxDecoration(
-                              color: Color(0xff72B745),
+                              color: const Color(0xff72B745),
                               borderRadius: BorderRadius.circular(4)),
-                          child: Center(
+                          child: const Center(
                             child: Text(
                               '30 قطعة', // Replace with your text
                               style:
@@ -171,7 +171,7 @@ class ProductCard extends StatelessWidget {
                       children: [
                         Container(
                           width: size.width * 0.13,
-                          child: Flexible(
+                          child: const Flexible(
                             child: Text(
                               'أغيد علوان', // Replace with your text
                               overflow: TextOverflow.ellipsis,
@@ -185,13 +185,13 @@ class ProductCard extends StatelessWidget {
                             ),
                           ),
                         ),
-                        Icon(Icons.person, color: Color(0xff72B745))
+                        const Icon(Icons.person, color: Color(0xff72B745))
                       ],
                     )
                   ],
                 ),
-                SizedBox(height: 8),
-                Row(
+                const SizedBox(height: 8),
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(

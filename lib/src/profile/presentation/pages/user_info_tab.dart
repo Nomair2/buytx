@@ -1,0 +1,378 @@
+// ignore_for_file: must_be_immutable
+
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
+import '../../../../core/common/widgets/custom_primary_button.dart';
+import '../widgets/inapp_info_tile.dart';
+
+class UserInfoTab extends StatefulWidget {
+  const UserInfoTab({super.key});
+
+  @override
+  State<UserInfoTab> createState() => _UserInfoTabState();
+}
+
+class _UserInfoTabState extends State<UserInfoTab> {
+  @override
+  Widget build(BuildContext context) {
+    final double height = MediaQuery.of(context).size.height;
+    final double width = MediaQuery.of(context).size.width;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        Material(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              InappInfoTile(title: "المتابعين", value: "350", onTap: () {}),
+              InappInfoTile(title: "يتابع", value: "150", onTap: () {}),
+              InappInfoTile(title: "المبيعات", value: "50", onTap: () {}),
+            ],
+          ),
+        ),
+        const SizedBox(height: 35),
+        Padding(
+          padding: const EdgeInsets.only(right: 25),
+          child: Text(
+            "السيرة الذاتية",
+            style: Theme.of(context).textTheme.bodySmall,
+          ),
+        ),
+        const SizedBox(height: 35),
+        Text(
+          " تاجر محترف و موثوق متخصص في بيع القطع الإلكترونية ذات جودة عالية و أسعار تنافسية , خدمة عملاء مميزة , مع إلتزام بالمواعيد و الاحترام ذات جودة عالية و أسعار تنافسية , خدمة عملاء مميزة ",
+          style: Theme.of(context).textTheme.titleSmall,
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: 30),
+        Divider(
+          color: Theme.of(context).colorScheme.inversePrimary,
+          endIndent: 5,
+          indent: 5,
+        ),
+        UserInfoCell(
+          title: "الأسم الكامل",
+          child: Expanded(
+            child: Text(
+              "اغيد علوان",
+              style: Theme.of(context).textTheme.bodySmall,
+            ),
+          ),
+        ),
+        const SizedBox(height: 15),
+        Divider(
+          color: Theme.of(context).colorScheme.inversePrimary,
+          endIndent: 5,
+          indent: 5,
+        ),
+        UserInfoCell(
+          title: "البريد الإلكتروني",
+          child: Row(
+            // mainAxisSize: MainAxisSize.min,
+            // mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Material(
+                child: InkWell(
+                  onTap: () {},
+                  child: Icon(Icons.edit,
+                      color: Theme.of(context).primaryColor, size: 17),
+                ),
+              ),
+              const SizedBox(width: 3),
+              Text(
+                "aghiad@gmail.com",
+                style: Theme.of(context).textTheme.titleSmall,
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 10),
+        Divider(
+          color: Theme.of(context).colorScheme.inversePrimary,
+          endIndent: 5,
+          indent: 5,
+        ),
+        UserInfoCell(
+          title: "كلمة السر",
+          child: Row(
+            children: [
+              Material(
+                child: InkWell(
+                  onTap: () => context.pushNamed('edit_password'),
+                  child: Icon(Icons.edit,
+                      color: Theme.of(context).primaryColor, size: 17),
+                ),
+              ),
+              const SizedBox(width: 3),
+              Text(
+                "مشفرة",
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 10),
+        Divider(
+          color: Theme.of(context).colorScheme.inversePrimary,
+          endIndent: 5,
+          indent: 5,
+        ),
+        UserInfoCell(
+          title: "اسم المستخدم",
+          child: Row(
+            children: [
+              Material(
+                child: InkWell(
+                  onTap: () {},
+                  child: Icon(Icons.edit,
+                      color: Theme.of(context).primaryColor, size: 17),
+                ),
+              ),
+              const SizedBox(width: 3),
+              Text(
+                "@Aghiad _2Ex",
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 10),
+        Divider(
+          color: Theme.of(context).colorScheme.inversePrimary,
+          endIndent: 5,
+          indent: 5,
+        ),
+        UserInfoCell(
+          title: "الهاتف",
+          child: Row(
+            children: [
+              Material(
+                child: InkWell(
+                  onTap: () {},
+                  child: Icon(Icons.edit,
+                      color: Theme.of(context).primaryColor, size: 17),
+                ),
+              ),
+              const SizedBox(width: 3),
+              Text(
+                "9639855122",
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 10),
+        Divider(
+          color: Theme.of(context).colorScheme.inversePrimary,
+          endIndent: 5,
+          indent: 5,
+        ),
+        UserInfoCell(
+          title: "حالة الهاتف",
+          child: Row(
+            children: [
+              Material(
+                child: InkWell(
+                  onTap: () {},
+                  child: Icon(Icons.edit,
+                      color: Theme.of(context).primaryColor, size: 17),
+                ),
+              ),
+              const SizedBox(width: 3),
+              Text(
+                "ظاهر",
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 10),
+        Divider(
+          color: Theme.of(context).colorScheme.inversePrimary,
+          endIndent: 5,
+          indent: 5,
+        ),
+        UserInfoCell(
+            title: "الحساب",
+            child: InfoStatusBtn(
+              text: "نشط",
+              onPressed: () {},
+            )),
+        const SizedBox(height: 2),
+        Divider(
+          color: Theme.of(context).colorScheme.inversePrimary,
+          endIndent: 5,
+          indent: 5,
+        ),
+        UserInfoCell(
+          title: "التحذيرات",
+          child: Row(
+            children: [
+              Material(
+                child: InkWell(
+                  onTap: () {},
+                  child: Icon(Icons.edit,
+                      color: Theme.of(context).primaryColor, size: 17),
+                ),
+              ),
+              const SizedBox(width: 3),
+              Text(
+                "0",
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 10),
+        Divider(
+          color: Theme.of(context).colorScheme.inversePrimary,
+          endIndent: 5,
+          indent: 5,
+        ),
+        UserInfoCell(
+            title: "حالة الحساب",
+            child: InfoStatusBtn(
+              text: "فعال",
+              onPressed: () {},
+            )),
+        const SizedBox(height: 2),
+        Divider(
+          color: Theme.of(context).colorScheme.inversePrimary,
+          endIndent: 5,
+          indent: 5,
+        ),
+        UserInfoCell(
+          title: "نوع الحساب",
+          child: Row(
+            children: [
+              Material(
+                child: InkWell(
+                  onTap: () {},
+                  child: Icon(Icons.edit,
+                      color: Theme.of(context).primaryColor, size: 17),
+                ),
+              ),
+              const SizedBox(width: 3),
+              Text(
+                "عادي",
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 10),
+        Divider(
+          color: Theme.of(context).colorScheme.inversePrimary,
+          endIndent: 5,
+          indent: 5,
+        ),
+        UserInfoCell(
+          title: "التقييم",
+          child: Row(
+            children: [
+              Text(
+                "9.5 تقييم",
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+              const SizedBox(width: 3),
+              Icon(Icons.star, color: Colors.amber, size: 17)
+            ],
+          ),
+        ),
+        const SizedBox(height: 10),
+        Divider(
+          color: Theme.of(context).colorScheme.inversePrimary,
+          endIndent: 5,
+          indent: 5,
+        ),
+        UserInfoCell(
+          title: "المستخدمين المحظورين",
+          child: Text(
+            "0",
+            style: Theme.of(context).textTheme.bodySmall,
+          ),
+        ),
+        const SizedBox(height: 10),
+        Divider(
+          color: Theme.of(context).colorScheme.inversePrimary,
+          endIndent: 5,
+          indent: 5,
+        ),
+        UserInfoCell(
+          title: "تاريخ الدخول",
+          child: Text(
+            "2025-03",
+            style: Theme.of(context).textTheme.bodySmall,
+          ),
+        ),
+        const SizedBox(height: 10),
+        Divider(
+          color: Theme.of(context).colorScheme.inversePrimary,
+          endIndent: 5,
+          indent: 5,
+        ),
+        const SizedBox(height: 30),
+        Center(
+          child: CustomPrimaryButton(
+            text: "إنشاء نافذة",
+            color: Theme.of(context).primaryColor,
+            height: height / 18,
+            width: width / 1.1,
+            ontap: () => context.push('/create_window'),
+          ),
+        ),
+        const SizedBox(height: 300),
+      ],
+    );
+  }
+}
+
+class InfoStatusBtn extends StatelessWidget {
+  InfoStatusBtn({
+    super.key,
+    required this.text,
+    this.onPressed,
+  });
+  Function()? onPressed;
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialButton(
+      onPressed: onPressed,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      color: Theme.of(context).primaryColor,
+      textColor: Colors.white,
+      child: Text(text),
+    );
+  }
+}
+
+class UserInfoCell extends StatelessWidget {
+  const UserInfoCell({
+    super.key,
+    required this.title,
+    required this.child,
+  });
+  final String title;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          child,
+          Text(
+            title,
+            style: Theme.of(context).textTheme.bodySmall,
+          ),
+        ],
+      ),
+    );
+  }
+}
