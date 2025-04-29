@@ -7,6 +7,7 @@ class AppTheme {
     primaryColor: AppColors.lightPrimary,
     scaffoldBackgroundColor: AppColors.lightBackground,
     colorScheme: ColorScheme.dark(
+      surface:AppColors.lightBackground,
         onSecondary: Colors.black,
         onBackground: AppColors.lightButton,
         brightness: Brightness.light,
@@ -48,6 +49,7 @@ class AppTheme {
     scaffoldBackgroundColor: AppColors.darkBackground,
     textTheme: AppText.darkText,
     colorScheme: ColorScheme.dark(
+        surface: AppColors.darkBackground,
         onSecondary: Colors.white,
         onBackground: AppColors.darkButton,
         brightness: Brightness.dark,

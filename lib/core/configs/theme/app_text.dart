@@ -23,6 +23,8 @@ class AppText {
         fontWeight: FontWeight.w600,
         fontSize: 16,
         color: AppColors.lightBackground),
+    displaySmall: TextStyle(
+        fontWeight: FontWeight.w300, fontSize: 16, color: Colors.black),
   );
 
   static const darkText = TextTheme(
@@ -50,5 +52,7 @@ class AppText {
         fontWeight: FontWeight.w600,
         fontSize: 16,
         color: AppColors.lightBackground),
+    displaySmall: TextStyle(
+        fontWeight: FontWeight.w300, fontSize: 16, color: Colors.white),
   );
 }
