@@ -8,7 +8,7 @@ final GoRouter router = GoRouter(
       path: '/',
       name: 'splash',
       // builder: (context, state) => SplashPage(),
-      builder: (context, state) => ProfileView(),
+      builder: (context, state) =>const UserProfileView(),
     ),
     //---
     GoRoute(
@@ -77,7 +77,7 @@ final GoRouter router = GoRouter(
       builder: (context, state) {
         // final token = state.pathParameters['token']!;
         // return ResetPasswordPage(token: token);
-        return CreateWindow();
+        return const CreateWindow();
       },
     ),
     //---
@@ -85,11 +85,18 @@ final GoRouter router = GoRouter(
       path: '/edit_password',
       name: 'edit_password',
       builder: (context, state) {
-        // final token = state.pathParameters['token']!;
-        // return ResetPasswordPage(token: token);
         return const EditPasswordScreen();
       },
     ),
+    //---
+    GoRoute(
+      path: '/follwer_page',
+      name: 'follwer_page',
+      builder: (context, state) {
+        return const FollowersPage();
+      },
+    ),
+    //---
   ],
 );
 

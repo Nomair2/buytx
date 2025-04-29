@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:marabh/src/auth/presentation/widgets/auth_text_field.dart';
 
@@ -27,57 +28,80 @@ class _EditPasswordScreenState extends State<EditPasswordScreen> {
             child: Column(
               children: [
                 const SizedBox(height: 50),
-                Text(
-                  "تعديل كلمة السر",
-                  style: Theme.of(context).textTheme.titleLarge,
+                FadeInDown(
+                  duration: const Duration(milliseconds: 1000),
+                  curve: Curves.linearToEaseOut,
+                  child: Text(
+                    "تعديل كلمة السر",
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
                 ),
                 const SizedBox(height: 50),
                 SizedBox(
-                  child: Image.asset(AppImage.newPasswordImage),
+                  child: FadeInDown(
+                      duration: const Duration(milliseconds: 1200),
+                      curve: Curves.linearToEaseOut,
+                      child: Image.asset(AppImage.changePasswordImage)),
                 ),
                 const SizedBox(height: 60),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
-                  child: AuthTextField(
-                    text: "Old Password",
-                    controller: oldPass,
-                    preIcon: Icon(
-                      Icons.key,
-                      color: Theme.of(context).primaryColor,
+                FadeInUp(
+                  duration: const Duration(milliseconds: 1000),
+                  curve: Curves.linearToEaseOut,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child: AuthTextField(
+                      text: "Old Password",
+                      controller: oldPass,
+                      preIcon: Icon(
+                        Icons.key,
+                        color: Theme.of(context).primaryColor,
+                      ),
                     ),
                   ),
                 ),
                 const SizedBox(height: 30),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
-                  child: AuthTextField(
-                    text: "New Password",
-                    controller: newPass,
-                    preIcon: Icon(
-                      Icons.key,
-                      color: Theme.of(context).primaryColor,
+                FadeInUp(
+                  duration: const Duration(milliseconds: 1000),
+                  curve: Curves.linearToEaseOut,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child: AuthTextField(
+                      text: "New Password",
+                      controller: newPass,
+                      preIcon: Icon(
+                        Icons.key,
+                        color: Theme.of(context).primaryColor,
+                      ),
                     ),
                   ),
                 ),
                 const SizedBox(height: 30),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
-                  child: AuthTextField(
-                    text: "Confirm Password",
-                    controller: confirmPass,
-                    preIcon: Icon(
-                      Icons.key,
-                      color: Theme.of(context).primaryColor,
+                FadeInUp(
+                  duration: const Duration(milliseconds: 1000),
+                  curve: Curves.linearToEaseOut,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child: AuthTextField(
+                      text: "Confirm Password",
+                      controller: confirmPass,
+                      preIcon: Icon(
+                        Icons.key,
+                        color: Theme.of(context).primaryColor,
+                      ),
                     ),
                   ),
                 ),
                 const SizedBox(height: 30),
-                CustomPrimaryButton(
-                  text: "إنشاء نافذة",
-                  color: Theme.of(context).primaryColor,
-                  height: height / 18,
-                  width: width / 1.1,
-                  ontap: () {},
+                FadeInUp(
+                  duration: const Duration(milliseconds: 1000),
+                  curve: Curves.linearToEaseOut,
+                  child: CustomPrimaryButton(
+                    text: "تعديل",
+                    color: Theme.of(context).primaryColor,
+                    height: height / 18,
+                    width: width / 1.1,
+                    ontap: () {},
+                  ),
                 ),
                 const SizedBox(height: 50),
               ],

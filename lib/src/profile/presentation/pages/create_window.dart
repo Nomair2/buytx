@@ -1,14 +1,9 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
 import '../../../../core/common/widgets/custom_primary_button.dart';
 import '../../../../core/configs/assets/app_image.dart';
-import '../../../../core/configs/theme/app_text.dart';
-import '../../../home/widgets/customCircularButton.dart';
-import '../../../home/widgets/profile_tab.dart';
-import '../widgets/inapp_info_tile.dart';
 import '../widgets/more_button.dart';
-import 'user_info_tab.dart';
 
 class CreateWindow extends StatefulWidget {
   const CreateWindow({super.key});
@@ -55,70 +50,96 @@ class _CreateWindowState extends State<CreateWindow> {
                           children: [
                             SizedBox(height: height / 11),
                             //this is the status of this account
-                            Center(
-                              child: Text(
-                                "متصل",
-                                style: TextStyle(
-                                  color: Theme.of(context).primaryColor,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w300,
-                                  decoration: TextDecoration.none,
+                            ZoomInDown(
+                              duration: const Duration(milliseconds: 850),
+                              child: Center(
+                                child: Text(
+                                  "متصل",
+                                  style: TextStyle(
+                                    color: Theme.of(context).primaryColor,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w300,
+                                    decoration: TextDecoration.none,
+                                  ),
                                 ),
                               ),
                             ),
                             //this is the name of the user
-                            Center(
-                              child: Text(
-                                "أغيد علوان",
-                                style: Theme.of(context).textTheme.titleMedium,
+                            ZoomInDown(
+                              duration: const Duration(milliseconds: 900),
+                              child: Center(
+                                child: Text(
+                                  "أغيد علوان",
+                                  style:
+                                      Theme.of(context).textTheme.titleMedium,
+                                ),
                               ),
                             ),
                             const SizedBox(height: 8),
                             //this is the user tag
-                            Center(
-                              child: Text(
-                                "@Aghiad _2Ex",
-                                style: Theme.of(context).textTheme.titleSmall,
+                            ZoomInDown(
+                              duration: const Duration(milliseconds: 950),
+                              child: Center(
+                                child: Text(
+                                  "@Aghiad _2Ex",
+                                  style: Theme.of(context).textTheme.titleSmall,
+                                ),
                               ),
                             ),
                             const SizedBox(height: 30),
-                            Text(
-                              "يمكنك إنشاءنوافذ خاصة بك التي ستعرف عن خدماتك و متجرك",
-                              style: Theme.of(context).textTheme.bodyLarge,
-                              textAlign: TextAlign.center,
+                            ZoomInDown(
+                              duration: const Duration(milliseconds: 1000),
+                              child: Text(
+                                "يمكنك إنشاءنوافذ خاصة بك التي ستعرف عن خدماتك و متجرك",
+                                style: Theme.of(context).textTheme.bodyLarge,
+                                textAlign: TextAlign.center,
+                              ),
                             ),
                             const SizedBox(height: 30),
-                            Padding(
-                              padding: const EdgeInsets.only(right: 25),
-                              child: Text(
-                                "اسم النافذة",
-                                style: Theme.of(context).textTheme.bodySmall,
+                            SlideInRight(
+                              curve: Curves.easeInOut,
+                              child: Padding(
+                                padding: const EdgeInsets.only(right: 25),
+                                child: Text(
+                                  "اسم النافذة",
+                                  style: Theme.of(context).textTheme.bodySmall,
+                                ),
                               ),
                             ),
                             const SizedBox(height: 20),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 12),
-                              child: Material(
-                                child: CustomTextField(
-                                    windowController: windowController),
+                            SlideInRight(
+                              curve: Curves.easeInOut,
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 12),
+                                child: Material(
+                                  child: CustomTextField(
+                                      windowController: windowController),
+                                ),
                               ),
                             ),
                             const SizedBox(height: 30),
-                            Padding(
-                              padding: const EdgeInsets.only(right: 25),
-                              child: Text(
-                                "محتوى النافذة",
-                                style: Theme.of(context).textTheme.bodySmall,
+                            SlideInRight(
+                              curve: Curves.easeInOut,
+                              child: Padding(
+                                padding: const EdgeInsets.only(right: 25),
+                                child: Text(
+                                  "محتوى النافذة",
+                                  style: Theme.of(context).textTheme.bodySmall,
+                                ),
                               ),
                             ),
                             const SizedBox(height: 20),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 12),
-                              child: Material(
-                                child: CustomTextFieldArea(
-                                    windowController: windowContentController),
+                            SlideInRight(
+                              curve: Curves.easeInOut,
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 12),
+                                child: Material(
+                                  child: CustomTextFieldArea(
+                                      windowController:
+                                          windowContentController),
+                                ),
                               ),
                             ),
                             const SizedBox(height: 30),
@@ -152,17 +173,20 @@ class _CreateWindowState extends State<CreateWindow> {
     return Positioned(
       top: height / 4.9,
       left: width / 2.9,
-      child: Container(
-        padding: const EdgeInsets.all(2),
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          shape: BoxShape.circle,
-        ),
-        child: const CircleAvatar(
-          backgroundImage:
-              //later we bring the image from the api
-              AssetImage("assets/images/Rectangle.png"),
-          radius: 70,
+      child: ZoomInDown(
+        duration: const Duration(milliseconds: 800),
+        child: Container(
+          padding: const EdgeInsets.all(2),
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            shape: BoxShape.circle,
+          ),
+          child: const CircleAvatar(
+            backgroundImage:
+                //later we bring the image from the api
+                AssetImage("assets/images/Rectangle.png"),
+            radius: 70,
+          ),
         ),
       ),
     );
@@ -178,20 +202,28 @@ class _CreateWindowState extends State<CreateWindow> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          IconButton(
-            onPressed: backFunction,
-            icon: Icon(
-              Icons.arrow_back,
-              color: Theme.of(context).colorScheme.onSecondary,
-              size: 30,
+          FadeInLeft(
+            duration: const Duration(milliseconds: 800),
+            curve: Curves.linearToEaseOut,
+            child: IconButton(
+              onPressed: backFunction,
+              icon: Icon(
+                Icons.arrow_back,
+                color: Theme.of(context).colorScheme.onSecondary,
+                size: 30,
+              ),
             ),
           ),
-          MoreButton(
-            colorIcon: Theme.of(context).colorScheme.primaryContainer,
-            colors: Theme.of(context).colorScheme.onSecondary,
-            icons: Icons.more_vert,
-            onPressed: moreFunction,
-            size: 22,
+          FadeInRight(
+            duration: const Duration(milliseconds: 800),
+            curve: Curves.linearToEaseOut,
+            child: MoreButton(
+              colorIcon: Theme.of(context).colorScheme.primaryContainer,
+              colors: Theme.of(context).colorScheme.onSecondary,
+              icons: Icons.more_vert,
+              onPressed: moreFunction,
+              size: 22,
+            ),
           ),
         ],
       ),

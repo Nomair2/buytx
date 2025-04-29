@@ -1,19 +1,20 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/common/widgets/custom_primary_button.dart';
 import '../widgets/inapp_info_tile.dart';
 
-class UserInfoTab extends StatefulWidget {
-  const UserInfoTab({super.key});
+class DealerInfoTab extends StatefulWidget {
+  const DealerInfoTab({super.key});
 
   @override
-  State<UserInfoTab> createState() => _UserInfoTabState();
+  State<DealerInfoTab> createState() => _DealerInfoTabState();
 }
 
-class _UserInfoTabState extends State<UserInfoTab> {
+class _DealerInfoTabState extends State<DealerInfoTab> {
   @override
   Widget build(BuildContext context) {
     final double height = MediaQuery.of(context).size.height;
@@ -23,35 +24,47 @@ class _UserInfoTabState extends State<UserInfoTab> {
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         Material(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              InappInfoTile(title: "المتابعين", value: "350", onTap: () {}),
-              InappInfoTile(title: "يتابع", value: "150", onTap: () {}),
-              InappInfoTile(title: "المبيعات", value: "50", onTap: () {}),
-            ],
+          child: ZoomInDown(
+            // delay: Duration(milliseconds: 1000),
+            duration: const Duration(milliseconds: 1000),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                InappInfoTile(
+                    title: "المتابعين",
+                    value: "350",
+                    onTap: () {
+                      context.pushNamed('follwer_page');
+                    }),
+                InappInfoTile(title: "يتابع", value: "150", onTap: () {}),
+                InappInfoTile(title: "المبيعات", value: "50", onTap: () {}),
+              ],
+            ),
           ),
         ),
         const SizedBox(height: 35),
         Padding(
           padding: const EdgeInsets.only(right: 25),
-          child: Text(
-            "السيرة الذاتية",
-            style: Theme.of(context).textTheme.bodySmall,
+          child: SlideInRight(
+            curve: Curves.linearToEaseOut,
+            child: Text(
+              "السيرة الذاتية",
+              style: Theme.of(context).textTheme.bodySmall,
+            ),
           ),
         ),
         const SizedBox(height: 35),
-        Text(
-          " تاجر محترف و موثوق متخصص في بيع القطع الإلكترونية ذات جودة عالية و أسعار تنافسية , خدمة عملاء مميزة , مع إلتزام بالمواعيد و الاحترام ذات جودة عالية و أسعار تنافسية , خدمة عملاء مميزة ",
-          style: Theme.of(context).textTheme.titleSmall,
-          textAlign: TextAlign.center,
+        ZoomIn(
+          duration: const Duration(milliseconds: 1000),
+          curve: Curves.easeInOut,
+          child: Text(
+            " تاجر محترف و موثوق متخصص في بيع القطع الإلكترونية ذات جودة عالية و أسعار تنافسية , خدمة عملاء مميزة , مع إلتزام بالمواعيد و الاحترام ذات جودة عالية و أسعار تنافسية , خدمة عملاء مميزة ",
+            style: Theme.of(context).textTheme.titleSmall,
+            textAlign: TextAlign.center,
+          ),
         ),
         const SizedBox(height: 30),
-        Divider(
-          color: Theme.of(context).colorScheme.inversePrimary,
-          endIndent: 5,
-          indent: 5,
-        ),
+        const AnimatedDivider(),
         UserInfoCell(
           title: "الأسم الكامل",
           child: Expanded(
@@ -62,11 +75,7 @@ class _UserInfoTabState extends State<UserInfoTab> {
           ),
         ),
         const SizedBox(height: 15),
-        Divider(
-          color: Theme.of(context).colorScheme.inversePrimary,
-          endIndent: 5,
-          indent: 5,
-        ),
+        const AnimatedDivider(),
         UserInfoCell(
           title: "البريد الإلكتروني",
           child: Row(
@@ -89,11 +98,7 @@ class _UserInfoTabState extends State<UserInfoTab> {
           ),
         ),
         const SizedBox(height: 10),
-        Divider(
-          color: Theme.of(context).colorScheme.inversePrimary,
-          endIndent: 5,
-          indent: 5,
-        ),
+        const AnimatedDivider(),
         UserInfoCell(
           title: "كلمة السر",
           child: Row(
@@ -114,11 +119,7 @@ class _UserInfoTabState extends State<UserInfoTab> {
           ),
         ),
         const SizedBox(height: 10),
-        Divider(
-          color: Theme.of(context).colorScheme.inversePrimary,
-          endIndent: 5,
-          indent: 5,
-        ),
+        const AnimatedDivider(),
         UserInfoCell(
           title: "اسم المستخدم",
           child: Row(
@@ -139,11 +140,7 @@ class _UserInfoTabState extends State<UserInfoTab> {
           ),
         ),
         const SizedBox(height: 10),
-        Divider(
-          color: Theme.of(context).colorScheme.inversePrimary,
-          endIndent: 5,
-          indent: 5,
-        ),
+        const AnimatedDivider(),
         UserInfoCell(
           title: "الهاتف",
           child: Row(
@@ -164,11 +161,7 @@ class _UserInfoTabState extends State<UserInfoTab> {
           ),
         ),
         const SizedBox(height: 10),
-        Divider(
-          color: Theme.of(context).colorScheme.inversePrimary,
-          endIndent: 5,
-          indent: 5,
-        ),
+        const AnimatedDivider(),
         UserInfoCell(
           title: "حالة الهاتف",
           child: Row(
@@ -189,11 +182,7 @@ class _UserInfoTabState extends State<UserInfoTab> {
           ),
         ),
         const SizedBox(height: 10),
-        Divider(
-          color: Theme.of(context).colorScheme.inversePrimary,
-          endIndent: 5,
-          indent: 5,
-        ),
+        const AnimatedDivider(),
         UserInfoCell(
             title: "الحساب",
             child: InfoStatusBtn(
@@ -201,11 +190,7 @@ class _UserInfoTabState extends State<UserInfoTab> {
               onPressed: () {},
             )),
         const SizedBox(height: 2),
-        Divider(
-          color: Theme.of(context).colorScheme.inversePrimary,
-          endIndent: 5,
-          indent: 5,
-        ),
+        const AnimatedDivider(),
         UserInfoCell(
           title: "التحذيرات",
           child: Row(
@@ -226,11 +211,7 @@ class _UserInfoTabState extends State<UserInfoTab> {
           ),
         ),
         const SizedBox(height: 10),
-        Divider(
-          color: Theme.of(context).colorScheme.inversePrimary,
-          endIndent: 5,
-          indent: 5,
-        ),
+        const AnimatedDivider(),
         UserInfoCell(
             title: "حالة الحساب",
             child: InfoStatusBtn(
@@ -238,11 +219,7 @@ class _UserInfoTabState extends State<UserInfoTab> {
               onPressed: () {},
             )),
         const SizedBox(height: 2),
-        Divider(
-          color: Theme.of(context).colorScheme.inversePrimary,
-          endIndent: 5,
-          indent: 5,
-        ),
+        const AnimatedDivider(),
         UserInfoCell(
           title: "نوع الحساب",
           child: Row(
@@ -263,11 +240,7 @@ class _UserInfoTabState extends State<UserInfoTab> {
           ),
         ),
         const SizedBox(height: 10),
-        Divider(
-          color: Theme.of(context).colorScheme.inversePrimary,
-          endIndent: 5,
-          indent: 5,
-        ),
+        const AnimatedDivider(),
         UserInfoCell(
           title: "التقييم",
           child: Row(
@@ -277,16 +250,12 @@ class _UserInfoTabState extends State<UserInfoTab> {
                 style: Theme.of(context).textTheme.bodySmall,
               ),
               const SizedBox(width: 3),
-              Icon(Icons.star, color: Colors.amber, size: 17)
+              const Icon(Icons.star, color: Colors.amber, size: 17)
             ],
           ),
         ),
         const SizedBox(height: 10),
-        Divider(
-          color: Theme.of(context).colorScheme.inversePrimary,
-          endIndent: 5,
-          indent: 5,
-        ),
+        const AnimatedDivider(),
         UserInfoCell(
           title: "المستخدمين المحظورين",
           child: Text(
@@ -295,11 +264,7 @@ class _UserInfoTabState extends State<UserInfoTab> {
           ),
         ),
         const SizedBox(height: 10),
-        Divider(
-          color: Theme.of(context).colorScheme.inversePrimary,
-          endIndent: 5,
-          indent: 5,
-        ),
+        const AnimatedDivider(),
         UserInfoCell(
           title: "تاريخ الدخول",
           child: Text(
@@ -308,11 +273,7 @@ class _UserInfoTabState extends State<UserInfoTab> {
           ),
         ),
         const SizedBox(height: 10),
-        Divider(
-          color: Theme.of(context).colorScheme.inversePrimary,
-          endIndent: 5,
-          indent: 5,
-        ),
+        const AnimatedDivider(),
         const SizedBox(height: 30),
         Center(
           child: CustomPrimaryButton(
@@ -325,6 +286,25 @@ class _UserInfoTabState extends State<UserInfoTab> {
         ),
         const SizedBox(height: 300),
       ],
+    );
+  }
+}
+
+class AnimatedDivider extends StatelessWidget {
+  const AnimatedDivider({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ZoomIn(
+      duration: const Duration(milliseconds: 800),
+      curve: Curves.easeInOut,
+      child: Divider(
+        color: Theme.of(context).colorScheme.inversePrimary,
+        endIndent: 5,
+        indent: 5,
+      ),
     );
   }
 }
@@ -366,10 +346,17 @@ class UserInfoCell extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          child,
-          Text(
-            title,
-            style: Theme.of(context).textTheme.bodySmall,
+          FadeInLeftBig(
+              duration: const Duration(milliseconds: 800),
+              curve: Curves.linearToEaseOut,
+              child: child),
+          FadeInRightBig(
+            duration: const Duration(milliseconds: 800),
+            curve: Curves.linearToEaseOut,
+            child: Text(
+              title,
+              style: Theme.of(context).textTheme.bodySmall,
+            ),
           ),
         ],
       ),

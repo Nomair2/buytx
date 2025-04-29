@@ -11,11 +11,13 @@ import 'package:marabh/src/auth/presentation/pages/signup_page.dart';
 import 'package:marabh/src/auth/presentation/pages/splash_page.dart';
 import 'package:marabh/src/auth/presentation/pages/verification_code_page.dart';
 import 'package:marabh/src/home/pages/home_page.dart';
-import 'package:marabh/src/profile/presentation/pages/user_info_tab.dart';
+import 'package:marabh/src/profile/presentation/pages/dealer_info_tab.dart';
 
 import '../../../src/home/pages/detail_product_page.dart';
 import '../../../src/profile/presentation/pages/create_window.dart';
 import '../../../src/profile/presentation/pages/edit_password_Screen.dart';
-import '../../../src/profile/presentation/pages/profile_view.dart';
+import '../../../src/profile/presentation/pages/followers_page.dart';
+import '../../../src/profile/presentation/pages/dealer_profile_view.dart';
+import '../../../src/profile/presentation/pages/user_profile_View.dart';
 
 part 'route.main.dart';

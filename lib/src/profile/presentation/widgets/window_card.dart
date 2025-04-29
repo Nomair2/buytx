@@ -6,15 +6,18 @@ class WindowCard extends StatelessWidget {
     required this.title,
     required this.content,
     required this.editOnTap,
-    required this.deleteOnTap,
+    required this.deleteOnTap, required this.img,
   });
   final String title;
   final String content;
+  final String img;
   final Function() editOnTap;
   final Function() deleteOnTap;
 
   @override
   Widget build(BuildContext context) {
+    final double height = MediaQuery.of(context).size.height;
+    final double width = MediaQuery.of(context).size.width;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
       margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 30),
@@ -36,12 +39,15 @@ class WindowCard extends StatelessWidget {
           ),
           const SizedBox(height: 15),
           Container(
-            width: 350,
-            height: 200,
+            width: width / 1.1,
+            height: height / 4,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
-              color: Colors.black,
+              // color: Colors.black,
             ),
+            //later we will change it to image.network
+            //when we will display image from api
+            child: Image.asset(img, fit: BoxFit.fill),
           ),
           const SizedBox(height: 15),
           Text(
