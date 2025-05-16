@@ -8,7 +8,7 @@ final GoRouter router = GoRouter(
       path: '/',
       name: 'splash',
       // builder: (context, state) => SplashPage(),
-      builder: (context, state) =>const UserProfileView(),
+      builder: (context, state) => const DealerProfileView(),
     ),
     //---
     GoRoute(
@@ -94,6 +94,13 @@ final GoRouter router = GoRouter(
       name: 'follwer_page',
       builder: (context, state) {
         return const FollowersPage();
+      },
+    ),
+    GoRoute(
+      path: '/dealer_profile',
+      name: 'dealer_profile',
+      builder: (context, state) {
+        return const DealerProfileView();
       },
     ),
     //---

@@ -20,151 +20,133 @@ class _CreateWindowState extends State<CreateWindow> {
   Widget build(BuildContext context) {
     final double height = MediaQuery.of(context).size.height;
     final double width = MediaQuery.of(context).size.width;
-    return SafeArea(
-      child: SingleChildScrollView(
-        // physics: NeverScrollableScrollPhysics(),
-        child: Column(
-          children: [
-            SizedBox(
-              width: width,
-              height: height,
-              child: Stack(
+    return Scaffold(
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            expandedHeight: height / 2.6,
+            // stretch: true,
+            flexibleSpace: FlexibleSpaceBar(
+              background: Stack(
                 children: [
                   _buildBg(height, width),
-                  _header(height, context, () {
-                    GoRouter.of(context).pop();
-                  }, () {}),
-                  Positioned(
-                    top: height / 3.5,
-                    child: Container(
-                      height: height,
-                      width: width,
-                      decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.surface,
-                          borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(50),
-                              topRight: Radius.circular(50))),
-                      child: SingleChildScrollView(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            SizedBox(height: height / 11),
-                            //this is the status of this account
-                            ZoomInDown(
-                              duration: const Duration(milliseconds: 850),
-                              child: Center(
-                                child: Text(
-                                  "متصل",
-                                  style: TextStyle(
-                                    color: Theme.of(context).primaryColor,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w300,
-                                    decoration: TextDecoration.none,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            //this is the name of the user
-                            ZoomInDown(
-                              duration: const Duration(milliseconds: 900),
-                              child: Center(
-                                child: Text(
-                                  "أغيد علوان",
-                                  style:
-                                      Theme.of(context).textTheme.titleMedium,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 8),
-                            //this is the user tag
-                            ZoomInDown(
-                              duration: const Duration(milliseconds: 950),
-                              child: Center(
-                                child: Text(
-                                  "@Aghiad _2Ex",
-                                  style: Theme.of(context).textTheme.titleSmall,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 30),
-                            ZoomInDown(
-                              duration: const Duration(milliseconds: 1000),
-                              child: Text(
-                                "يمكنك إنشاءنوافذ خاصة بك التي ستعرف عن خدماتك و متجرك",
-                                style: Theme.of(context).textTheme.bodyLarge,
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                            const SizedBox(height: 30),
-                            SlideInRight(
-                              curve: Curves.easeInOut,
-                              child: Padding(
-                                padding: const EdgeInsets.only(right: 25),
-                                child: Text(
-                                  "اسم النافذة",
-                                  style: Theme.of(context).textTheme.bodySmall,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 20),
-                            SlideInRight(
-                              curve: Curves.easeInOut,
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 12),
-                                child: Material(
-                                  child: CustomTextField(
-                                      windowController: windowController),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 30),
-                            SlideInRight(
-                              curve: Curves.easeInOut,
-                              child: Padding(
-                                padding: const EdgeInsets.only(right: 25),
-                                child: Text(
-                                  "محتوى النافذة",
-                                  style: Theme.of(context).textTheme.bodySmall,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 20),
-                            SlideInRight(
-                              curve: Curves.easeInOut,
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 12),
-                                child: Material(
-                                  child: CustomTextFieldArea(
-                                      windowController:
-                                          windowContentController),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 30),
-                            Center(
-                              child: CustomPrimaryButton(
-                                text: "إنشاء نافذة",
-                                color: Theme.of(context).primaryColor,
-                                height: height / 18,
-                                width: width / 1.1,
-                                ontap: () {},
-                              ),
-                            ),
-                            const SizedBox(height: 400),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  //======image
+                  //-----
+                  _header(height, context, () {}, () {}),
                   _userImage(height, width),
                 ],
               ),
             ),
-          ],
-        ),
+          ),
+          //=====
+          SliverToBoxAdapter(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                //this is the status of this account
+                ZoomInDown(
+                  duration: const Duration(milliseconds: 850),
+                  child: Center(
+                    child: Text(
+                      "متصل",
+                      style: TextStyle(
+                        color: Theme.of(context).primaryColor,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w300,
+                        decoration: TextDecoration.none,
+                      ),
+                    ),
+                  ),
+                ),
+                //this is the name of the user
+                ZoomInDown(
+                  duration: const Duration(milliseconds: 900),
+                  child: Center(
+                    child: Text(
+                      "أغيد علوان",
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 8),
+                //this is the user tag
+                ZoomInDown(
+                  duration: const Duration(milliseconds: 950),
+                  child: Center(
+                    child: Text(
+                      "@Aghiad _2Ex",
+                      style: Theme.of(context).textTheme.titleSmall,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 30),
+                ZoomInDown(
+                  duration: const Duration(milliseconds: 1000),
+                  child: Text(
+                    "يمكنك إنشاءنوافذ خاصة بك التي ستعرف عن خدماتك و متجرك",
+                    style: Theme.of(context).textTheme.bodyLarge,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                const SizedBox(height: 30),
+                SlideInRight(
+                  curve: Curves.easeInOut,
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 25),
+                    child: Text(
+                      "اسم النافذة",
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                SlideInRight(
+                  curve: Curves.easeInOut,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    child: Material(
+                      child:
+                          CustomTextField(windowController: windowController),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 30),
+                SlideInRight(
+                  curve: Curves.easeInOut,
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 25),
+                    child: Text(
+                      "محتوى النافذة",
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+
+                SlideInRight(
+                  curve: Curves.easeInOut,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    child: Material(
+                      child: CustomTextFieldArea(
+                          windowController: windowContentController),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 30),
+                Center(
+                  child: CustomPrimaryButton(
+                    text: "إنشاء نافذة",
+                    color: Theme.of(context).primaryColor,
+                    height: height / 18,
+                    width: width / 1.1,
+                    ontap: () {},
+                  ),
+                ),
+                const SizedBox(height: 400),
+              ],
+            ),
+          )
+        ],
       ),
     );
   }
@@ -196,24 +178,24 @@ class _CreateWindowState extends State<CreateWindow> {
   Positioned _header(double height, BuildContext context,
       Function() backFunction, Function() moreFunction) {
     return Positioned(
-      top: height / 13,
+      top: height / 15,
       right: 10,
       left: 10,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          FadeInLeft(
-            duration: const Duration(milliseconds: 800),
-            curve: Curves.linearToEaseOut,
-            child: IconButton(
-              onPressed: backFunction,
-              icon: Icon(
-                Icons.arrow_back,
-                color: Theme.of(context).colorScheme.onSecondary,
-                size: 30,
-              ),
-            ),
-          ),
+          // FadeInLeft(
+          //   duration: const Duration(milliseconds: 800),
+          //   curve: Curves.linearToEaseOut,
+          //   child: IconButton(
+          //     onPressed: backFunction,
+          //     icon: Icon(
+          //       Icons.arrow_back,
+          //       color: Theme.of(context).colorScheme.onSecondary,
+          //       size: 30,
+          //     ),
+          //   ),
+          // ),
           FadeInRight(
             duration: const Duration(milliseconds: 800),
             curve: Curves.linearToEaseOut,

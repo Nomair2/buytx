@@ -46,9 +46,9 @@ class ProductCard extends StatelessWidget {
                       color: Colors.green,
                       borderRadius: BorderRadius.circular(5),
                     ),
-                    child: const Text(
+                    child: Text(
                       'New',
-                      style: TextStyle(color: Colors.white),
+                      style: Theme.of(context).textTheme.bodySmall,
                     ),
                   ),
                 ),
@@ -59,12 +59,12 @@ class ProductCard extends StatelessWidget {
                     onTap: () {},
                     child: Container(
                       // width: 35,
-                      padding: EdgeInsets.all(5),
+                      padding: const EdgeInsets.all(5),
                       // height: 35,
                       decoration: BoxDecoration(
                           color: Colors.white.withOpacity(0.5),
                           borderRadius: BorderRadius.circular(90)),
-                      child: Center(
+                      child: const Center(
                         child: Icon(
                           Icons.favorite_border,
                           color: Colors.red,
@@ -81,16 +81,13 @@ class ProductCard extends StatelessWidget {
                     decoration: BoxDecoration(
                         gradient: LinearGradient(colors: [
                       // Colors.white,
-                      Color(0xffF6921E).withOpacity(0),
-                      Color(0xffF6921E),
+                      const Color(0xffF6921E).withOpacity(0),
+                      const Color(0xffF6921E),
                     ], begin: Alignment.topCenter, end: Alignment.bottomRight)),
                     child: Text(
                       'Homs',
                       textAlign: TextAlign.end,
-                      style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 16,
-                          color: AppColors.lightBackground),
+                      style: Theme.of(context).textTheme.bodySmall,
                     ),
                   ),
                 ),
@@ -101,16 +98,13 @@ class ProductCard extends StatelessWidget {
                     decoration: BoxDecoration(
                         gradient: LinearGradient(colors: [
                       // Colors.white,
-                      Color(0xff72B745),
-                      Color(0xff72B745).withOpacity(0),
+                      const Color(0xff72B745),
+                      const Color(0xff72B745).withOpacity(0),
                     ], begin: Alignment.topCenter, end: Alignment.bottomRight)),
                     child: Text(
                       ' iphone 16 ',
                       textAlign: TextAlign.start,
-                      style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 16,
-                          color: AppColors.lightBackground),
+                      style: Theme.of(context).textTheme.bodySmall,
                     ),
                   ),
                 ),
@@ -118,7 +112,7 @@ class ProductCard extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(top: 10, right: 10, left: 10),
+            padding: const EdgeInsets.only(top: 10, right: 10, left: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -129,17 +123,16 @@ class ProductCard extends StatelessWidget {
                       clipBehavior: Clip.none,
                       children: [
                         Container(
-                          width: 60,
+                          width: 65,
                           height: 24,
-                          padding: EdgeInsets.symmetric(horizontal: 10),
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
                           decoration: BoxDecoration(
-                              color: Color(0xff72B745),
+                              color: const Color(0xff72B745),
                               borderRadius: BorderRadius.circular(4)),
                           child: Center(
                             child: Text(
                               '30 قطعة', // Replace with your text
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 10),
+                              style: Theme.of(context).textTheme.labelSmall,
                             ),
                           ),
                         ),
@@ -171,7 +164,7 @@ class ProductCard extends StatelessWidget {
                       children: [
                         Container(
                           width: size.width * 0.13,
-                          child: Flexible(
+                          child: const Flexible(
                             child: Text(
                               'أغيد علوان', // Replace with your text
                               overflow: TextOverflow.ellipsis,
@@ -179,24 +172,26 @@ class ProductCard extends StatelessWidget {
                               textDirection: TextDirection.rtl,
                               style: TextStyle(
                                   fontSize: 10,
+                                  decoration: TextDecoration.none,
                                   fontWeight: FontWeight.w400,
                                   color: Colors.black,
                                   overflow: TextOverflow.ellipsis),
                             ),
                           ),
                         ),
-                        Icon(Icons.person, color: Color(0xff72B745))
+                        const Icon(Icons.person, color: Color(0xff72B745))
                       ],
                     )
                   ],
                 ),
-                SizedBox(height: 8),
-                Row(
+                const SizedBox(height: 8),
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       'غير موجود',
                       style: TextStyle(
+                          decoration: TextDecoration.none,
                           fontSize: 10,
                           fontWeight: FontWeight.bold,
                           color: Colors.red),
@@ -208,6 +203,7 @@ class ProductCard extends StatelessWidget {
                           textDirection: TextDirection.rtl,
                           style: TextStyle(
                             fontSize: 10,
+                            decoration: TextDecoration.none,
                             fontWeight: FontWeight.w400,
                             color: Colors.black,
                           ),

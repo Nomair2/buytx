@@ -1,5 +1,9 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import '../../../../core/common/widgets/product_card.dart';
+import '../../../../core/common/widgets/text_icon_button.dart';
 import '../../../../core/configs/assets/app_image.dart';
 import '../widgets/inapp_info_tile.dart';
 import '../widgets/more_button.dart';
@@ -17,133 +21,203 @@ class _UserProfileViewState extends State<UserProfileView> {
   Widget build(BuildContext context) {
     final double height = MediaQuery.of(context).size.height;
     final double width = MediaQuery.of(context).size.width;
-    return SafeArea(
-      child: SingleChildScrollView(
-        // physics: NeverScrollableScrollPhysics(),
-        child: Column(
-          children: [
-            SizedBox(
-              width: width,
-              height: height,
-              child: Stack(
+    return Scaffold(
+      body: SafeArea(
+        child: CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              expandedHeight: height / 2.6,
+              // stretch: true,
+              flexibleSpace: FlexibleSpaceBar(
+                background: Stack(
+                  children: [
+                    _buildBg(height, width),
+                    //-----
+                    _header(height, context, () {
+                      context.pushNamed('dealer_profile');
+                    }, () {}),
+                    _userImage(height, width),
+                  ],
+                ),
+              ),
+            ),
+            //=====
+
+            SliverToBoxAdapter(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  _buildBg(height, width),
-                  _header(height, context, () {}, () {}),
-                  Positioned(
-                    top: height / 3.5,
-                    child: Container(
-                      height: height,
-                      width: width,
-                      decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.surface,
-                          borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(50),
-                              topRight: Radius.circular(50))),
-                      child: SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            SizedBox(height: height / 11),
-                            //this is the status of this account
-                            ZoomInDown(
-                              duration: const Duration(milliseconds: 750),
-                              child: Text(
-                                "متصل",
-                                style: Theme.of(context).textTheme.bodyLarge,
-                              ),
-                            ),
-                            //this is the name of the user
-                            ZoomInDown(
-                              duration: const Duration(milliseconds: 800),
-                              child: Text(
-                                "أغيد علوان",
-                                style: Theme.of(context).textTheme.titleMedium,
-                              ),
-                            ),
-                            const SizedBox(height: 8),
-                            //this is the user tag
-                            ZoomInDown(
-                              delay: const Duration(milliseconds: 850),
-                              child: Text(
-                                "@Aghiad _2Ex",
-                                style: Theme.of(context).textTheme.titleSmall,
-                              ),
-                            ),
-                            const SizedBox(height: 30),
-                            const LoactionRateTile(),
-                            const SizedBox(height: 40),
-                            const UserSocialInfo(),
-                            const SizedBox(height: 40),
-                            Material(
-                                child:
-                                    FollowBtn(title: "متابعة", onTap: () {})),
-                            const SizedBox(height: 10),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Container(
-                                  // margin: EdgeInsets.symmetric(horizontal: 120),
-                                  // padding: EdgeInsets.symmetric(vertical: 5),
-                                  height: 46,
-                                  width: 150,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(30),
-                                    color: Theme.of(context).primaryColor,
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        "دردشة",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .titleMedium,
-                                      ),
-                                      const SizedBox(width: 8),
-                                      Icon(
-                                        Icons.chat_outlined,
-                                        color: Colors.white,
-                                      )
-                                    ],
-                                  ),
-                                ),
-                                Container(
-                                  // margin: EdgeInsets.symmetric(horizontal: 120),
-                                  // padding: EdgeInsets.symmetric(vertical: 5),
-                                  height: 46,
-                                  width: 150,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(30),
-                                    color: Theme.of(context).primaryColor,
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        "دردشة",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .titleMedium,
-                                      ),
-                                      const SizedBox(width: 8),
-                                      Icon(
-                                        Icons.chat_outlined,
-                                        color: Colors.white,
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
+                  // SizedBox(height: height / 11),
+                  const SizedBox(height: 20),
+                  Center(
+                    child: Column(
+                      children: [
+                        //this is the status of this account
+                        ZoomInDown(
+                          duration: const Duration(milliseconds: 750),
+                          child: Text(
+                            "متصل",
+                            style: Theme.of(context).textTheme.bodyLarge,
+                          ),
                         ),
+                        //this is the name of the user
+                        ZoomInDown(
+                          duration: const Duration(milliseconds: 800),
+                          child: Text(
+                            "أغيد علوان",
+                            style: Theme.of(context).textTheme.titleMedium,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        //this is the user tag
+                        ZoomInDown(
+                          delay: const Duration(milliseconds: 850),
+                          child: Text(
+                            "@Aghiad _2Ex",
+                            style: Theme.of(context).textTheme.titleSmall,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 30),
+                  const LoactionRateTile(),
+                  const SizedBox(height: 40),
+                  const UserSocialInfo(),
+                  const SizedBox(height: 40),
+                  Material(
+                      child: ZoomInDown(
+                          duration: const Duration(milliseconds: 1100),
+                          child: FollowBtn(title: "متابعة", onTap: () {}))),
+                  const SizedBox(height: 10),
+                  Material(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        FadeInLeftBig(
+                          duration:const Duration(milliseconds: 900),
+                          curve:Curves.linearToEaseOut,
+                          child: TextIconButton(
+                            onTap: () {},
+                            title: "تواصل",
+                            icon: CupertinoIcons.phone,
+                          ),
+                        ),
+                        FadeInRightBig(
+                          duration:const Duration(milliseconds: 900),
+                          curve:Curves.linearToEaseOut,
+                          child: TextIconButton(
+                            onTap: () {},
+                            title: "دردشة",
+                            icon: Icons.chat_outlined,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 50),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 25),
+                    child: SlideInRight(
+                      curve: Curves.linearToEaseOut,
+                      child: Text(
+                        "الوصف",
+                        style: Theme.of(context).textTheme.bodySmall,
                       ),
                     ),
                   ),
-                  //======image
-                  _userImage(height, width),
+                  const SizedBox(height: 20),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 25),
+                    child: SlideInRight(
+                      curve: Curves.linearToEaseOut,
+                      child: Text(
+                        "أضمن أفضل المنتجات بأفضل الأسعار",
+                        style: Theme.of(context).textTheme.titleSmall,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 40),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 25),
+                    child: SlideInRight(
+                      curve: Curves.linearToEaseOut,
+                      child: Text(
+                        "السيرة الذاتية",
+                        style: Theme.of(context).textTheme.bodySmall,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 25),
+                    child: SlideInRight(
+                      curve: Curves.linearToEaseOut,
+                      child: Text(
+                        " تاجر محترف و موثوق متخصص في بيع القطع الإلكترونية ذات جودة عالية و أسعار تنافسية , خدمة عملاء مميزة , مع إلتزام بالمواعيد و الاحترام ذات جودة عالية و أسعار تنافسية , خدمة عملاء مميزة ",
+                        style: Theme.of(context).textTheme.titleSmall,
+                        textAlign: TextAlign.end,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 40),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 25),
+                    child: SlideInRight(
+                      curve: Curves.linearToEaseOut,
+                      child: Text(
+                        "الهاتف",
+                        style: Theme.of(context).textTheme.bodySmall,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 25),
+                    child: SlideInRight(
+                      curve: Curves.linearToEaseOut,
+                      child: Text(
+                        "095624525",
+                        style: Theme.of(context).textTheme.titleSmall,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 40),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 25),
+                    child: SlideInRight(
+                      curve: Curves.linearToEaseOut,
+                      child: Text(
+                        "العروض المشابهة",
+                        style: Theme.of(context).textTheme.bodySmall,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 30),
                 ],
               ),
             ),
+            //=====
+
+            SliverToBoxAdapter(
+                child: Container(
+              margin: const EdgeInsets.only(left: 10, right: 10),
+              height: height,
+              width: width,
+              child: GridView.builder(
+                // shrinkWrap: true,
+                // physics: const NeverScrollableScrollPhysics(),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10,
+                    childAspectRatio: 0.6),
+                itemCount: 8,
+                itemBuilder: (context, index) {
+                  return ProductCard();
+                },
+              ),
+            )),
           ],
         ),
       ),
@@ -295,6 +369,7 @@ class LoactionRateTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
+      color: Colors.transparent,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
@@ -335,3 +410,8 @@ class LoactionRateTile extends StatelessWidget {
     );
   }
 }
+
+
+
+
+                   

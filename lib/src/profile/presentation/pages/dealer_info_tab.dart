@@ -105,7 +105,7 @@ class _DealerInfoTabState extends State<DealerInfoTab> {
             children: [
               Material(
                 child: InkWell(
-                  onTap: () => context.pushNamed('edit_password'),
+                  onTap: () => context.push('/edit_password'),
                   child: Icon(Icons.edit,
                       color: Theme.of(context).primaryColor, size: 17),
                 ),

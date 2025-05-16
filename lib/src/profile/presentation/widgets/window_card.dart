@@ -6,7 +6,8 @@ class WindowCard extends StatelessWidget {
     required this.title,
     required this.content,
     required this.editOnTap,
-    required this.deleteOnTap, required this.img,
+    required this.deleteOnTap,
+    required this.img,
   });
   final String title;
   final String content;
@@ -57,7 +58,7 @@ class WindowCard extends StatelessWidget {
                 fontWeight: FontWeight.w300,
                 fontSize: 16,
                 decoration: TextDecoration.none),
-            textAlign: TextAlign.center,
+            textAlign: TextAlign.end,
           ),
           const SizedBox(height: 30),
           Padding(
