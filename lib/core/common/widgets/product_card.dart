@@ -39,18 +39,19 @@ class ProductCard extends StatelessWidget {
                 Positioned(
                   top: 0,
                   left: 0,
-                  child: Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                    decoration: BoxDecoration(
-                      color: Colors.green,
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: Text(
-                      'New',
-                      style: Theme.of(context).textTheme.bodySmall,
-                    ),
-                  ),
+                  child: Image.asset("assets/images/tag.png"),
+                  // Container(
+                  //   padding:
+                  //       const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  //   decoration: BoxDecoration(
+                  //     color: Colors.green,
+                  //     borderRadius: BorderRadius.circular(5),
+                  //   ),
+                  //   child: Text(
+                  //     'New',
+                  //     style: Theme.of(context).textTheme.bodySmall,
+                  //   ),
+                  // ),
                 ),
                 Positioned(
                   top: 5,

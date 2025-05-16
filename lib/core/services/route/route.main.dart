@@ -8,7 +8,7 @@ final GoRouter router = GoRouter(
       path: '/',
       name: 'splash',
       // builder: (context, state) => SplashPage(),
-      builder: (context, state) => const DealerProfileView(),
+      builder: (context, state) => const HomePage(),
     ),
     //---
     GoRoute(
