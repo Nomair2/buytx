@@ -19,4 +19,10 @@ import 'package:marabh/src/chat/presentaion/pages/all_chat_page.dart';
 import 'package:marabh/src/chat/presentaion/pages/messages_page.dart';
 import 'package:marabh/src/home/pages/home_page.dart';
 
+import '../../../src/profile/presentation/pages/create_window.dart';
+import '../../../src/profile/presentation/pages/dealer_profile_view.dart';
+import '../../../src/profile/presentation/pages/edit_password_Screen.dart';
+import '../../../src/profile/presentation/pages/followers_page.dart';
+import '../../../src/profile/presentation/pages/user_profile_View.dart';
+
 part 'route.main.dart';

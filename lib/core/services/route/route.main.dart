@@ -4,11 +4,21 @@ final GoRouter router = GoRouter(
   debugLogDiagnostics: true,
   initialLocation: '/',
   routes: [
+<<<<<<< HEAD
     // GoRoute(
     //   path: '/',
     //   name: 'splash',
     //   builder: (context, state) => SplashPage(),
     // ),
+=======
+    GoRoute(
+      path: '/',
+      name: 'splash',
+      // builder: (context, state) => SplashPage(),
+      builder: (context, state) => const HomePage(),
+    ),
+    //---
+>>>>>>> origin/master2
     GoRoute(
       path: '/auth/phone',
       name: 'phone',
@@ -21,21 +31,25 @@ final GoRouter router = GoRouter(
         return PhonePage(user);
       },
     ),
+    //----
     GoRoute(
       path: '/auth/login',
       name: 'login',
       builder: (context, state) => LoginPage(),
     ),
+    //----
     GoRoute(
       path: '/auth/signup',
       name: 'register',
       builder: (context, state) => SignupPage(),
     ),
+    //-----
     GoRoute(
       path: '/auth/forgot-password',
       name: 'forgot-password',
       builder: (context, state) => ForgetPasswordPage(),
     ),
+    //-----
     GoRoute(
       path: '/auth/verify-otp',
       name: 'verify-otp',
@@ -43,6 +57,7 @@ final GoRouter router = GoRouter(
         parameter: state.extra as VerifyOtpParameter,
       ),
     ),
+    //----
     GoRoute(
       path: '/auth/new-password',
       name: 'new-password',
@@ -50,6 +65,7 @@ final GoRouter router = GoRouter(
         return NewPasswordPage();
       },
     ),
+<<<<<<< HEAD
     GoRoute(
       path: '/',
       name: 'chatsScreen',
@@ -64,6 +80,53 @@ final GoRouter router = GoRouter(
                 id: state.extra as String,
               ),
             )),
+=======
+    //----
+    // GoRoute(
+    //   path: '/profile',
+    //   name: "profile",
+    //   builder: (context, state) => const ProfileView(),
+    // ),
+    //-----
+    // GoRoute(
+    //   path: '/user_info_tab',
+    //   name: "user_info_tab",
+    //   builder: (context, state) => const UserInfoTab(),
+    // ),
+    GoRoute(
+      path: '/create_window',
+      name: 'create_window',
+      builder: (context, state) {
+        // final token = state.pathParameters['token']!;
+        // return ResetPasswordPage(token: token);
+        return const CreateWindow();
+      },
+    ),
+    //---
+    GoRoute(
+      path: '/edit_password',
+      name: 'edit_password',
+      builder: (context, state) {
+        return const EditPasswordScreen();
+      },
+    ),
+    //---
+    GoRoute(
+      path: '/follwer_page',
+      name: 'follwer_page',
+      builder: (context, state) {
+        return const FollowersPage();
+      },
+    ),
+    GoRoute(
+      path: '/dealer_profile',
+      name: 'dealer_profile',
+      builder: (context, state) {
+        return const DealerProfileView();
+      },
+    ),
+    //---
+>>>>>>> origin/master2
   ],
 );
 

@@ -10,7 +10,11 @@ class AppTheme {
     scaffoldBackgroundColor: AppColors.lightBackground,
 
     colorScheme: ColorScheme.dark(
+<<<<<<< HEAD
         onSurface: Color(0xffE8ECE8),
+=======
+      surface:AppColors.lightBackground,
+>>>>>>> origin/master2
         onSecondary: Colors.black,
         onBackground: AppColors.lightButton,
         brightness: Brightness.light,
@@ -53,7 +57,11 @@ class AppTheme {
     scaffoldBackgroundColor: AppColors.darkBackground,
     textTheme: AppText.darkText,
     colorScheme: ColorScheme.dark(
+<<<<<<< HEAD
         onSurface: AppColors.darkBackground,
+=======
+        surface: AppColors.darkBackground,
+>>>>>>> origin/master2
         onSecondary: Colors.white,
         onBackground: AppColors.darkButton,
         brightness: Brightness.dark,
