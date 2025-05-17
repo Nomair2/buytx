@@ -24,7 +24,14 @@ class AppText {
         fontSize: 16,
         color: AppColors.lightBackground),
     displaySmall: TextStyle(
+<<<<<<< HEAD
         fontWeight: FontWeight.w300, fontSize: 16, color: Colors.black),
+=======
+      color: Colors.black,
+      fontWeight: FontWeight.w300,
+      fontSize: 15,
+    ),
+>>>>>>> c92adb2aaad40f2799e81c394ce719ead3ad6726
   );
 
   static const darkText = TextTheme(
@@ -53,6 +60,13 @@ class AppText {
         fontSize: 16,
         color: AppColors.lightBackground),
     displaySmall: TextStyle(
+<<<<<<< HEAD
         fontWeight: FontWeight.w300, fontSize: 16, color: Colors.white),
+=======
+      color: Colors.white,
+      fontWeight: FontWeight.w300,
+      fontSize: 15,
+    ),
+>>>>>>> c92adb2aaad40f2799e81c394ce719ead3ad6726
   );
 }

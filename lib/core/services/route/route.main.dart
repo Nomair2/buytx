@@ -15,10 +15,16 @@ final GoRouter router = GoRouter(
       path: '/',
       name: 'splash',
       // builder: (context, state) => SplashPage(),
+<<<<<<< HEAD
       builder: (context, state) => const HomePage(),
     ),
     //---
 >>>>>>> origin/master2
+=======
+      builder: (context, state) =>const UserProfileView(),
+    ),
+    //---
+>>>>>>> c92adb2aaad40f2799e81c394ce719ead3ad6726
     GoRoute(
       path: '/auth/phone',
       name: 'phone',
@@ -66,6 +72,7 @@ final GoRouter router = GoRouter(
       },
     ),
 <<<<<<< HEAD
+<<<<<<< HEAD
     GoRoute(
       path: '/',
       name: 'chatsScreen',
@@ -81,6 +88,8 @@ final GoRouter router = GoRouter(
               ),
             )),
 =======
+=======
+>>>>>>> c92adb2aaad40f2799e81c394ce719ead3ad6726
     //----
     // GoRoute(
     //   path: '/profile',
@@ -118,6 +127,7 @@ final GoRouter router = GoRouter(
         return const FollowersPage();
       },
     ),
+<<<<<<< HEAD
     GoRoute(
       path: '/dealer_profile',
       name: 'dealer_profile',
@@ -127,6 +137,9 @@ final GoRouter router = GoRouter(
     ),
     //---
 >>>>>>> origin/master2
+=======
+    //---
+>>>>>>> c92adb2aaad40f2799e81c394ce719ead3ad6726
   ],
 );
 

@@ -85,7 +85,7 @@ class ProductCard extends StatelessWidget {
                       const Color(0xffF6921E).withOpacity(0),
                       const Color(0xffF6921E),
                     ], begin: Alignment.topCenter, end: Alignment.bottomRight)),
-                    child: Text(
+                    child: const Text(
                       'Homs',
                       textAlign: TextAlign.end,
                       style: Theme.of(context).textTheme.bodySmall,
@@ -102,7 +102,7 @@ class ProductCard extends StatelessWidget {
                       const Color(0xff72B745),
                       const Color(0xff72B745).withOpacity(0),
                     ], begin: Alignment.topCenter, end: Alignment.bottomRight)),
-                    child: Text(
+                    child: const Text(
                       ' iphone 16 ',
                       textAlign: TextAlign.start,
                       style: Theme.of(context).textTheme.bodySmall,
@@ -130,7 +130,7 @@ class ProductCard extends StatelessWidget {
                           decoration: BoxDecoration(
                               color: const Color(0xff72B745),
                               borderRadius: BorderRadius.circular(4)),
-                          child: Center(
+                          child: const Center(
                             child: Text(
                               '30 قطعة', // Replace with your text
                               style: Theme.of(context).textTheme.labelSmall,

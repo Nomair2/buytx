@@ -1,9 +1,13 @@
 import 'package:animate_do/animate_do.dart';
+<<<<<<< HEAD
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/common/widgets/product_card.dart';
 import '../../../../core/common/widgets/text_icon_button.dart';
+=======
+import 'package:flutter/material.dart';
+>>>>>>> c92adb2aaad40f2799e81c394ce719ead3ad6726
 import '../../../../core/configs/assets/app_image.dart';
 import '../widgets/inapp_info_tile.dart';
 import '../widgets/more_button.dart';
@@ -21,6 +25,7 @@ class _UserProfileViewState extends State<UserProfileView> {
   Widget build(BuildContext context) {
     final double height = MediaQuery.of(context).size.height;
     final double width = MediaQuery.of(context).size.width;
+<<<<<<< HEAD
     return Scaffold(
       body: SafeArea(
         child: CustomScrollView(
@@ -218,6 +223,135 @@ class _UserProfileViewState extends State<UserProfileView> {
                 },
               ),
             )),
+=======
+    return SafeArea(
+      child: SingleChildScrollView(
+        // physics: NeverScrollableScrollPhysics(),
+        child: Column(
+          children: [
+            SizedBox(
+              width: width,
+              height: height,
+              child: Stack(
+                children: [
+                  _buildBg(height, width),
+                  _header(height, context, () {}, () {}),
+                  Positioned(
+                    top: height / 3.5,
+                    child: Container(
+                      height: height,
+                      width: width,
+                      decoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.surface,
+                          borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(50),
+                              topRight: Radius.circular(50))),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            SizedBox(height: height / 11),
+                            //this is the status of this account
+                            ZoomInDown(
+                              duration: const Duration(milliseconds: 750),
+                              child: Text(
+                                "متصل",
+                                style: Theme.of(context).textTheme.bodyLarge,
+                              ),
+                            ),
+                            //this is the name of the user
+                            ZoomInDown(
+                              duration: const Duration(milliseconds: 800),
+                              child: Text(
+                                "أغيد علوان",
+                                style: Theme.of(context).textTheme.titleMedium,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            //this is the user tag
+                            ZoomInDown(
+                              delay: const Duration(milliseconds: 850),
+                              child: Text(
+                                "@Aghiad _2Ex",
+                                style: Theme.of(context).textTheme.titleSmall,
+                              ),
+                            ),
+                            const SizedBox(height: 30),
+                            const LoactionRateTile(),
+                            const SizedBox(height: 40),
+                            const UserSocialInfo(),
+                            const SizedBox(height: 40),
+                            Material(
+                                child:
+                                    FollowBtn(title: "متابعة", onTap: () {})),
+                            const SizedBox(height: 10),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Container(
+                                  // margin: EdgeInsets.symmetric(horizontal: 120),
+                                  // padding: EdgeInsets.symmetric(vertical: 5),
+                                  height: 46,
+                                  width: 150,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(30),
+                                    color: Theme.of(context).primaryColor,
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        "دردشة",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleMedium,
+                                      ),
+                                      const SizedBox(width: 8),
+                                      Icon(
+                                        Icons.chat_outlined,
+                                        color: Colors.white,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  // margin: EdgeInsets.symmetric(horizontal: 120),
+                                  // padding: EdgeInsets.symmetric(vertical: 5),
+                                  height: 46,
+                                  width: 150,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(30),
+                                    color: Theme.of(context).primaryColor,
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        "دردشة",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleMedium,
+                                      ),
+                                      const SizedBox(width: 8),
+                                      Icon(
+                                        Icons.chat_outlined,
+                                        color: Colors.white,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  //======image
+                  _userImage(height, width),
+                ],
+              ),
+            ),
+>>>>>>> c92adb2aaad40f2799e81c394ce719ead3ad6726
           ],
         ),
       ),
@@ -240,7 +374,11 @@ class _UserProfileViewState extends State<UserProfileView> {
           child: const CircleAvatar(
             backgroundImage:
                 //later we bring the image from the api
+<<<<<<< HEAD
                 AssetImage("assets/images/person.png"),
+=======
+                AssetImage("assets/images/Rectangle.png"),
+>>>>>>> c92adb2aaad40f2799e81c394ce719ead3ad6726
             radius: 70,
           ),
         ),
@@ -369,7 +507,10 @@ class LoactionRateTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
+<<<<<<< HEAD
       color: Colors.transparent,
+=======
+>>>>>>> c92adb2aaad40f2799e81c394ce719ead3ad6726
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
@@ -410,8 +551,11 @@ class LoactionRateTile extends StatelessWidget {
     );
   }
 }
+<<<<<<< HEAD
 
 
 
 
                    
+=======
+>>>>>>> c92adb2aaad40f2799e81c394ce719ead3ad6726

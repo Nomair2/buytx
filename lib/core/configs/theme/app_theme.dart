@@ -11,10 +11,14 @@ class AppTheme {
 
     colorScheme: ColorScheme.dark(
 <<<<<<< HEAD
+<<<<<<< HEAD
         onSurface: Color(0xffE8ECE8),
 =======
       surface:AppColors.lightBackground,
 >>>>>>> origin/master2
+=======
+        surface: AppColors.lightBackground,
+>>>>>>> c92adb2aaad40f2799e81c394ce719ead3ad6726
         onSecondary: Colors.black,
         onBackground: AppColors.lightButton,
         brightness: Brightness.light,
@@ -58,10 +62,14 @@ class AppTheme {
     textTheme: AppText.darkText,
     colorScheme: ColorScheme.dark(
 <<<<<<< HEAD
+<<<<<<< HEAD
         onSurface: AppColors.darkBackground,
 =======
         surface: AppColors.darkBackground,
 >>>>>>> origin/master2
+=======
+        surface: AppColors.darkBackground,
+>>>>>>> c92adb2aaad40f2799e81c394ce719ead3ad6726
         onSecondary: Colors.white,
         onBackground: AppColors.darkButton,
         brightness: Brightness.dark,
