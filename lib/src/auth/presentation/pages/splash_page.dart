@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
@@ -28,11 +29,28 @@ class SplashPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Image.asset("assets/images/logo.png"),
-            SizedBox(
-              height: 10,
+            // FadeIn(child: Image.asset("assets/images/logo.png")),
+
+            FadeInImage(
+              fadeInDuration: Duration(seconds: 3),
+              placeholder: AssetImage(
+                "assets/images/logo.png",
+              ),
+              image: AssetImage(
+                "assets/images/logo.png",
+              ),
+              height: 100,
+              width: 100,
             ),
-            Image.asset("assets/images/Text.png"),
+            SizedBox(
+              height: 5,
+            ),
+            FadeInLeft(
+                duration: Duration(seconds: 3),
+                child: Image.asset(
+                  "assets/images/Text.png",
+                  height: 70,
+                )),
           ],
         )
             // Lottie.asset(

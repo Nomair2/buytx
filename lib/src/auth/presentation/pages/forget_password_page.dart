@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -5,6 +6,7 @@ import 'package:marabh/core/common/widgets/custom_primary_button.dart';
 import 'package:marabh/core/common/widgets/custom_second_button.dart';
 import 'package:marabh/core/configs/assets/app_image.dart';
 import 'package:marabh/core/error/show_error.dart';
+import 'package:marabh/core/services/route/router.dart';
 import 'package:marabh/src/auth/domain/usercase/validator/signup_validator.dart';
 import 'package:marabh/src/auth/presentation/bloc/auth/auth_bloc.dart';
 import 'package:marabh/src/auth/presentation/bloc/auth/auth_event.dart';
@@ -55,77 +57,69 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
                 SizedBox(height: size.height * 0.015),
                 _interEmail(context, 'أدخل البريد الإلكتروني'),
                 SizedBox(height: size.height * 0.04),
-                AuthTextField(
-                    controller: email,
-                    text: 'Enter Your Email Address',
-                    validtor: (value) => SignupValidator.validateEmail(value),
-                    preIcon: Icon(
-                      Icons.email,
-                      color: Theme.of(context).primaryColor,
-                    )),
+                FadeInLeft(
+                  duration: Duration(milliseconds: 500),
+                  child: AuthTextField(
+                      controller: email,
+                      text: 'البريد الإلكتروني',
+                      validtor: (value) => SignupValidator.validateEmail(value),
+                      sufIcon: Icon(
+                        Icons.email,
+                        color: Theme.of(context).primaryColor,
+                      )),
+                ),
                 SizedBox(height: size.height * 0.025),
                 _text(context, 'العودة إلى تسجيل الدخول'),
                 SizedBox(height: size.height * 0.05),
-                BlocConsumer<AuthBloc, AuthState>(
-                  builder: (context, state) {
-                    print("we started ");
-                    if (state is AuthLoading) {
-                      print("we loading ");
-                      return CustomPrimaryButton(
-                        ontap: () {},
-                        color: Theme.of(context).primaryColor,
-                        height: 39.23431396484375,
-                        width: size.width,
-                        text: '',
-                      );
-                    }
-                    return CustomPrimaryButton(
-                      ontap: () {
-                        if (_keyPassword.currentState!.validate()) {
-                          context
-                              .read<AuthBloc>()
-                              .add(AuthVerifyAccountEvent(email.text));
+                FadeInRight(
+                    duration: Duration(milliseconds: 800),
+                    child: BlocConsumer<AuthBloc, AuthState>(
+                      buildWhen: (prev, curr) => prev != curr,
+                      builder: (context, state) {
+                        print(state.runtimeType);
+                        print("we started ");
+                        print("1 ${state.runtimeType}");
+                        if (state is AuthLoading) {
+                          print("we loading ");
+                          return CustomPrimaryButton(
+                            ontap: () {},
+                            color: Theme.of(context).primaryColor,
+                            height: 45,
+                            width: size.width,
+                            text: '',
+                          );
+                        }
+                        return CustomPrimaryButton(
+                          ontap: () {
+                            if (_keyPassword.currentState!.validate()) {
+                              context
+                                  .read<AuthBloc>()
+                                  .add(AuthVerifyAccountEvent(email.text));
+                            }
+                          },
+                          color: Theme.of(context).primaryColor,
+                          height: 45,
+                          width: size.width,
+                          text: 'التالي',
+                        );
+                      },
+                      listener: (context, state) {
+                        if (state is AuthInitial) {
+                        } else if (state is AuthError) {
+                          context.read<AuthBloc>().add(AuthInitEvent());
+                          Future.delayed(Duration(seconds: 2));
+                          showError(state.message);
+                          print(state.runtimeType);
+                        } else if (state is AuthSuccess) {
+                          context.pushNamed('verify-otp',
+                              extra: VerifyOtpParameter(email.text, true));
                         }
                       },
-                      color: Theme.of(context).primaryColor,
-                      height: 39.23431396484375,
-                      width: size.width,
-                      text: 'التالي',
-                    );
-                  },
-                  listener: (context, state) {
-                    if (state is AuthError) {
-                      context.read<AuthBloc>().add(AuthInitEvent());
-                      showError(state.message);
-                    } else if (state is AuthSuccess) {
-                      context.goNamed('verify-otp', extra: email.text);
-                    }
-                  },
-                ),
-                // CustomPrimaryButton(
-                //   ontap: () {
-                //     print("1");
-                //     if (key.currentState!.validate()) {
-                //       print("2");
-                //       context.pushNamed('verify-otp', extra: email.text);
-                //     }
-                //     print("3");
-                //   },
-                //   color: Theme.of(context).primaryColor,
-                //   height: 39.23431396484375,
-                //   width: size.width,
-                //   text: 'التالي',
-                // ),
+                    )),
                 SizedBox(height: size.height * 0.02),
                 _haveAccount(context),
                 SizedBox(height: size.height * 0.04),
                 SizedBox(height: size.height * 0.02),
-                // CustomPrimaryButton(
-                //   color: Theme.of(context).colorScheme.primaryContainer,
-                //   width: 226,
-                //   height: 40,
-                //   text: 'Google تسجيل باستخدام ',
-                // ),
                 SizedBox(height: size.height * 0.03),
               ],
             ),

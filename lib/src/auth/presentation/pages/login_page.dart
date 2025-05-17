@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:marabh/core/services/route/router.dart';
 import 'package:marabh/src/auth/domain/usercase/validator/signup_validator.dart';
 import 'package:marabh/src/auth/presentation/bloc/auth/password_cubit.dart';
 import 'package:marabh/core/common/widgets/custom_primary_button.dart';
@@ -39,33 +40,42 @@ class LoginPage extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 42.81),
             child: Form(
               key: _keyLogin,
-              child: FadeInLeft(
-                child: Column(
-                  children: [
-                    SizedBox(height: size.height * 0.1),
-                    _buildTitle(context),
-                    SizedBox(height: size.height * 0.01),
-                    _buildImage(),
-                    SizedBox(height: size.height * 0.04),
-                    AuthTextField(
+              child: Column(
+                children: [
+                  SizedBox(height: size.height * 0.1),
+                  _buildTitle(context),
+                  SizedBox(height: size.height * 0.01),
+                  _buildImage(),
+                  SizedBox(height: size.height * 0.04),
+                  FadeInLeft(
+                    duration: Duration(milliseconds: 500),
+                    child: AuthTextField(
                         controller: email,
                         validtor: (value) =>
                             SignupValidator.validateEmail(value),
-                        text: 'Email or User Name or Mobile',
-                        preIcon: Icon(
+                        hintStyle: TextStyle(
+                            color: Color(0xff919296),
+                            fontWeight: FontWeight.w400,
+                            fontSize: 13),
+                        text:
+                            ' البريد الإلكتروني أو اسم المستخدم أو رقم الهاتف',
+                        sufIcon: Icon(
                           Icons.email,
                           color: Theme.of(context).primaryColor,
                         )),
-                    SizedBox(height: size.height * 0.015),
-                    BlocBuilder<PasswordVisibilityCubit, bool>(
+                  ),
+                  SizedBox(height: size.height * 0.015),
+                  FadeInLeft(
+                    duration: Duration(milliseconds: 800),
+                    child: BlocBuilder<PasswordVisibilityCubit, bool>(
                       builder: (context, state) {
                         return AuthTextField(
                             controller: password,
-                            text: 'Password',
+                            text: 'كلمة المرور',
                             validtor: (value) =>
                                 SignupValidator.validatePassword(value),
                             scure: state,
-                            sufIcon: IconButton(
+                            preIcon: IconButton(
                               onPressed: () => context
                                   .read<PasswordVisibilityCubit>()
                                   .toggleVisibility(),
@@ -76,16 +86,19 @@ class LoginPage extends StatelessWidget {
                                 color: Theme.of(context).primaryColor,
                               ),
                             ),
-                            preIcon: Icon(
+                            sufIcon: Icon(
                               FluentIcons.key_16_filled,
                               color: Theme.of(context).primaryColor,
                             ));
                       },
                     ),
-                    SizedBox(height: size.height * 0.025),
-                    _forgetText(context),
-                    SizedBox(height: size.height * 0.05),
-                    BlocConsumer<AuthBloc, AuthState>(
+                  ),
+                  SizedBox(height: size.height * 0.025),
+                  _forgetText(context),
+                  SizedBox(height: size.height * 0.05),
+                  FadeInRight(
+                    duration: Duration(milliseconds: 1200),
+                    child: BlocConsumer<AuthBloc, AuthState>(
                       builder: (context, state) {
                         print("we started ");
                         if (state is AuthLoading) {
@@ -93,7 +106,7 @@ class LoginPage extends StatelessWidget {
                           return CustomPrimaryButton(
                             ontap: () {},
                             color: Theme.of(context).primaryColor,
-                            height: 39.23431396484375,
+                            height: 45,
                             width: size.width,
                             text: '',
                           );
@@ -107,33 +120,48 @@ class LoginPage extends StatelessWidget {
                             }
                           },
                           color: Theme.of(context).primaryColor,
-                          height: 39.23431396484375,
+                          height: 45,
                           width: size.width,
                           text: 'تسجيل الدخول',
                         );
                       },
                       listener: (context, state) {
                         if (state is AuthError) {
-                          showError(state.message);
-                          context.read<AuthBloc>().add(AuthInitEvent());
+                          if (state.message
+                              .toLowerCase()
+                              .contains('not Activated'.toLowerCase())) {
+                            showSnak(context, 'Account is not Activated ,',
+                                'do you want to acitevate it ?', () {
+                              context
+                                  .read<AuthBloc>()
+                                  .add(AuthReVerifyAccountEvent(email.text));
+                              ScaffoldMessenger.of(context)
+                                  .hideCurrentSnackBar();
+                              context.pushNamed("verify-otp",
+                                  extra: VerifyOtpParameter(email.text, false));
+                            });
+                          } else {
+                            showError(state.message);
+                            context.read<AuthBloc>().add(AuthInitEvent());
+                          }
                         }
                       },
                     ),
-                    SizedBox(height: size.height * 0.02),
-                    _haveAccount(context),
-                    SizedBox(height: size.height * 0.04),
-                    _googleLogin(context),
-                    SizedBox(height: size.height * 0.02),
-                    CustomSecondButton(
-                      ontap: () async {},
-                      color: Theme.of(context).colorScheme.primaryContainer,
-                      width: 226,
-                      height: 40,
-                      text: 'Google تسجيل باستخدام ',
-                    ),
-                    SizedBox(height: size.height * 0.03),
-                  ],
-                ),
+                  ),
+                  SizedBox(height: size.height * 0.02),
+                  _haveAccount(context),
+                  SizedBox(height: size.height * 0.04),
+                  _googleLogin(context),
+                  SizedBox(height: size.height * 0.02),
+                  CustomSecondButton(
+                    ontap: () {},
+                    color: Theme.of(context).colorScheme.primaryContainer,
+                    width: 226,
+                    height: 40,
+                    text: 'Google تسجيل باستخدام ',
+                  ),
+                  SizedBox(height: size.height * 0.03),
+                ],
               ),
             ),
           ),

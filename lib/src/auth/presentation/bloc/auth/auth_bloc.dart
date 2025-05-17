@@ -5,7 +5,8 @@ import 'package:marabh/core/common/singletons/cache_helper.dart';
 import 'package:marabh/core/error/failure.dart';
 import 'package:marabh/core/services/injection_container.dart';
 import 'package:marabh/core/utils/typedefs.dart';
-import 'package:marabh/src/auth/domain/entity/user.dart';
+import 'package:marabh/src/auth/domain/entity/userRequest.dart';
+import 'package:marabh/src/auth/domain/entity/user_data_enetity.dart';
 import 'package:marabh/src/auth/domain/usercase/login.dart';
 import 'package:marabh/src/auth/domain/usercase/signup.dart';
 import 'package:marabh/src/auth/domain/usercase/verify_account.dart';
@@ -21,45 +22,79 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<AuthSignupEvent>(_onAuthSignupEvent);
     on<AuthInitEvent>(_onAuthInit);
     on<AuthVerifyAccountEvent>(_authVerifyAccountEvent);
+    on<AuthReVerifyAccountEvent>(_onAuthReVerifyAccountEvent);
   }
 
-  _authVerifyAccountEvent(AuthVerifyAccountEvent event, Emitter emit) async {
+  _onAuthReVerifyAccountEvent(AuthEvent event, Emitter emit) async {
+    //
+    //this method only for signup page , when the user get his account is not activated yet ,
+    //so call this method without change state .
+    //
+
     print("in bloc code 1 ");
-    emit(AuthLoading());
-    if (event is AuthVerifyAccountEvent) {
+    // emit(AuthLoading());
+    if (event is AuthReVerifyAccountEvent) {
       print("in bloc code 2 ");
       Either<Failure, void> dataReturn =
           await sl<VerifyAccountUseCase>().call(event.email);
       dataReturn.fold((Failure failuer) {
         print("in bloc code 3 ");
-        emit(AuthError(failuer.errorMessage));
       }, (_) {
         print("in bloc code 4 ");
-        emit(AuthSuccess());
       });
     }
     print("in bloc code is not current event ");
   }
 
+  _authVerifyAccountEvent(AuthVerifyAccountEvent event, Emitter emit) async {
+    print("in bloc code 1 ");
+    emit(AuthLoading());
+
+    print("in bloc code 2 ");
+
+    Either<Failure, void> dataReturn =
+        await sl<VerifyAccountUseCase>().call(event.email);
+    dataReturn.fold((Failure failuer) {
+      print("in bloc code 3 ");
+      print("the error is ${failuer.errorMessage}");
+      emit(AuthError(failuer.errorMessage));
+    }, (_) {
+      print("in bloc code 4 ");
+      emit(AuthSuccess());
+    });
+
+    // print("in bloc code 1 ");
+    // emit(AuthLoading());
+    // print("in bloc code 2 ");
+    // Either<Failure, void> dataReturn =
+    //     await sl<VerifyAccountUseCase>().call(event.email);
+    // dataReturn.fold((Failure failuer) {
+    //   print("in bloc code 3 ");
+    //   emit(AuthError(failuer.errorMessage));
+    // }, (_) {
+    //   print("in bloc code 4 ");
+    //   emit(AuthSuccess());
+    // });
+    // print("in bloc code is not current event ");
+  }
+
   _onAuthInit(AuthInitEvent event, Emitter emit) {
-    emit(AuthInitEvent());
+    emit(AuthInitial());
   }
 
   _authVerifyOtpEvent(AuthVerifyOtpEvent event, Emitter emit) async {
     print("in bloc code 1 ");
     emit(AuthLoading());
-    if (event is AuthVerifyOtpEvent) {
-      print("in bloc code 2 ");
-      Either<Failure, void> dataReturn = await sl<VerifyOtpUseCase>()
-          .call(verifyOtpParams(email: event.email, otp: event.otp));
-      dataReturn.fold((Failure failuer) {
-        print("in bloc code 3 ");
-        emit(AuthError(failuer.errorMessage));
-      }, (_) {
-        print("in bloc code 4 ");
-        emit(AuthSuccess());
-      });
-    }
+    print("in bloc code 2 ");
+    Either<Failure, void> dataReturn = await sl<VerifyOtpUseCase>()
+        .call(verifyOtpParams(email: event.email, otp: event.otp));
+    dataReturn.fold((Failure failuer) {
+      print("in bloc code 3 ");
+      emit(AuthError(failuer.errorMessage));
+    }, (_) {
+      print("in bloc code 4 ");
+      emit(AuthSuccess());
+    });
     print("in bloc code is not current event ");
   }
 
@@ -88,15 +123,19 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     emit(AuthLoading());
 
     print("in bloc code 2 ");
-    Either<Failure, void> dataReturn = await sl<LoginUseCase>().call(
+    Either<Failure, UserEntity> dataReturn = await sl<LoginUseCase>().call(
         LoginParams(
             email: AuthLoginEvent.username, password: AuthLoginEvent.password));
     dataReturn.fold((Failure failuer) {
       print("in bloc code 3 ");
       emit(AuthError(failuer.errorMessage));
-    }, (_) {
+    }, (r) {
+      sl<CacheHelper>().cacheSessionToken(r.token!);
       print("in bloc code 4 ");
+      // print(result);
+      // print(sl<CacheHelper>().getSessionToken());
       emit(AuthSuccess());
+      print('good');
     });
   }
 
@@ -105,13 +144,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     emit(AuthLoading());
 
     print("in bloc code 2 ");
-    Either<Failure, void> dataReturn = await sl<SignupUseCase>().call(UserEnity(
-        email: authSignupEvent.email,
-        password: authSignupEvent.password,
-        authProvider: authSignupEvent.authprovider,
-        fullName: authSignupEvent.fullname,
-        phone: authSignupEvent.phone,
-        username: authSignupEvent.username));
+    Either<Failure, void> dataReturn = await sl<SignupUseCase>().call(
+        UserRequestEnity(
+            email: authSignupEvent.email,
+            password: authSignupEvent.password,
+            authProvider: authSignupEvent.authprovider,
+            fullName: authSignupEvent.fullname,
+            phone: authSignupEvent.phone,
+            username: authSignupEvent.username));
     dataReturn.fold((Failure failuer) {
       print("in bloc code 3 ");
       print("the error is ${failuer.errorMessage}");

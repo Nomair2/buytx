@@ -7,11 +7,12 @@ import 'package:marabh/core/error/exceptions.dart';
 import 'package:marabh/core/utils/constant/network_constants.dart';
 import 'package:marabh/core/utils/error_response.dart';
 import 'package:marabh/core/utils/typedefs.dart';
-import 'package:marabh/src/auth/domain/entity/user.dart';
+import 'package:marabh/src/auth/data/model/user_data_model.dart';
+import 'package:marabh/src/auth/domain/entity/userRequest.dart';
 import 'package:http/http.dart' as http;
 
 abstract class AuthRemoteDataSource {
-  Future signup(UserEnity user);
+  Future signup(UserRequestEnity user);
 
   Future login(String email, String password);
 
@@ -30,7 +31,7 @@ class AuthRemoteDataSourceImp extends AuthRemoteDataSource {
   final http.Client _client;
 
   @override
-  Future<void> login(String email, String password) async {
+  Future<UserModel> login(String email, String password) async {
     print("in bloc source data 1 ");
     try {
       final url = Uri.parse('${NetworkConstants.baseUrl}$LOGIN_ENDPOINT');
@@ -47,6 +48,10 @@ class AuthRemoteDataSourceImp extends AuthRemoteDataSource {
             message: errorResponse.errorMessage,
             statusCode: response.statusCode);
       }
+      print(payload);
+      UserModel user = UserModel.fromMap(payload);
+
+      return user;
 
       // await sl<CacheHelper>().cacheSessionToken(payload['accessToken']);
       // final user = UserModel.fromMap(payload);
@@ -61,7 +66,7 @@ class AuthRemoteDataSourceImp extends AuthRemoteDataSource {
   }
 
   @override
-  Future<void> signup(UserEnity user) async {
+  Future<void> signup(UserRequestEnity user) async {
     print("in bloc source data 1 ");
     print(user.email);
     print(user.password);
@@ -88,6 +93,18 @@ class AuthRemoteDataSourceImp extends AuthRemoteDataSource {
         print(response.body);
         final errorResponse = ErrorResponse.fromMap(payload);
         print(errorResponse.errorMessage);
+        throw ServerExceptions(
+            message: errorResponse.errorMessage,
+            statusCode: response.statusCode);
+      }
+      final url2 =
+          Uri.parse('${NetworkConstants.baseUrl}$VERVIFY_ACCOUNT__ENDPOINT');
+      final response2 = await _client.post(url2,
+          body: jsonEncode({'email': user.email}),
+          headers: NetworkConstants.header);
+      if (response.statusCode != 200) {
+        final payload2 = jsonDecode(response2.body) as DataMap;
+        final errorResponse = ErrorResponse.fromMap(payload2);
         throw ServerExceptions(
             message: errorResponse.errorMessage,
             statusCode: response.statusCode);

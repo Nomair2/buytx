@@ -2,8 +2,10 @@ import 'package:dartz/dartz.dart';
 import 'package:marabh/core/error/exceptions.dart';
 import 'package:marabh/core/error/failure.dart';
 import 'package:marabh/core/utils/typedefs.dart';
+import 'package:marabh/src/auth/data/model/user_data_model.dart';
 import 'package:marabh/src/auth/data/source/auth_remote_data_source.dart';
-import 'package:marabh/src/auth/domain/entity/user.dart';
+import 'package:marabh/src/auth/domain/entity/userRequest.dart';
+import 'package:marabh/src/auth/domain/entity/user_data_enetity.dart';
 import 'package:marabh/src/auth/domain/repository/auth_repository.dart';
 
 class AuthRepositoryImp extends AuthRepository {
@@ -11,12 +13,13 @@ class AuthRepositoryImp extends AuthRepository {
   final AuthRemoteDataSource _authRemoteDataSource;
 
   @override
-  ResultFuture<void> login(String email, String password) async {
+  ResultFuture<UserEntity> login(String email, String password) async {
     print("in bloc repository data 1 ");
     try {
-      await _authRemoteDataSource.login(email, password);
+      UserModel userReturn = await _authRemoteDataSource.login(email, password);
       print("in bloc repository data 2 ");
-      return const Right(null);
+      UserEntity user = formUserModel(userReturn);
+      return Right(user);
     } on ServerExceptions catch (e) {
       print("in bloc repository data 3 ");
       return Left(ServerFailure.fromException(e));
@@ -24,7 +27,7 @@ class AuthRepositoryImp extends AuthRepository {
   }
 
   @override
-  ResultFuture<void> signup(UserEnity user) async {
+  ResultFuture<void> signup(UserRequestEnity user) async {
     try {
       await _authRemoteDataSource.signup(user);
       return const Right(null);

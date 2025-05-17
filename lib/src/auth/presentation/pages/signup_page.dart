@@ -3,11 +3,12 @@ import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:marabh/core/utils/rive_utils.dart';
 import 'package:marabh/src/auth/presentation/bloc/auth/password_cubit.dart';
 import 'package:marabh/core/common/widgets/custom_primary_button.dart';
 import 'package:marabh/core/common/widgets/custom_second_button.dart';
 import 'package:marabh/core/configs/assets/app_image.dart';
-import 'package:marabh/src/auth/domain/entity/user.dart';
+import 'package:marabh/src/auth/domain/entity/userRequest.dart';
 import 'package:marabh/src/auth/domain/usercase/validator/signup_validator.dart';
 import 'package:marabh/src/auth/presentation/bloc/auth/auth_bloc.dart';
 import 'package:marabh/src/auth/presentation/bloc/auth/auth_state.dart';
@@ -62,7 +63,7 @@ class _SignupPageState extends State<SignupPage> {
 
   OutlineInputBorder _inputBorder = OutlineInputBorder(
     borderRadius: BorderRadius.circular(30),
-    borderSide: BorderSide(color: Colors.green, width: 2),
+    borderSide: const BorderSide(color: Colors.green, width: 2),
   );
 
   @override
@@ -94,117 +95,144 @@ class _SignupPageState extends State<SignupPage> {
                     SizedBox(height: size.height * 0.01),
                     _buildImage(),
                     SizedBox(height: size.height * 0.04),
-                    AuthTextField(
-                        controller: email,
-                        validtor: (value) =>
-                            SignupValidator.validateEmail(value),
-                        text: 'Email',
-                        preIcon: Icon(
-                          Icons.email,
-                          color: Theme.of(context).primaryColor,
-                        )),
-                    SizedBox(height: size.height * 0.015),
-                    AuthTextField(
-                        controller: userName,
-                        text: 'UserName',
-                        validtor: (value) =>
-                            SignupValidator.validateUsername(value),
-                        preIcon: Icon(
-                          Icons.person,
-                          color: Theme.of(context).primaryColor,
-                        )),
-                    SizedBox(height: size.height * 0.015),
-                    AuthTextField(
-                        controller: fullName,
-                        text: 'FullName',
-                        validtor: (value) =>
-                            SignupValidator.validateFullName(value),
-                        preIcon: Icon(
-                          Icons.person,
-                          color: Theme.of(context).primaryColor,
-                        )),
-                    SizedBox(height: size.height * 0.015),
-                    BlocBuilder<PasswordVisibilityCubit, bool>(
-                      builder: (context, state) {
-                        return AuthTextField(
-                            scure: state,
-                            controller: password,
-                            validtor: (value) =>
-                                SignupValidator.validatePassword(value),
-                            text: 'Password',
-                            sufIcon: IconButton(
-                              onPressed: () => context
-                                  .read<PasswordVisibilityCubit>()
-                                  .toggleVisibility(),
-                              icon: Icon(
-                                state
-                                    ? CupertinoIcons.eye_slash_fill
-                                    : CupertinoIcons.eye_fill,
-                                color: Theme.of(context).primaryColor,
-                              ),
-                            ),
-                            preIcon: Icon(
-                              FluentIcons.key_16_filled,
-                              color: Theme.of(context).primaryColor,
-                            ));
-                      },
+                    FadeInLeft(
+                      duration: Duration(milliseconds: 500),
+                      child: AuthTextField(
+                          controller: email,
+                          validtor: (value) =>
+                              SignupValidator.validateEmail(value),
+                          text: 'البريد الإلكتروني',
+                          sufIcon: Icon(
+                            Icons.email,
+                            color: Theme.of(context).primaryColor,
+                          )),
                     ),
                     SizedBox(height: size.height * 0.015),
-                    BlocBuilder<ConfirmPasswordVisibilityCubit, bool>(
-                      builder: (context, state2) {
-                        return AuthTextField(
-                            controller: confirmPassword,
-                            scure: state2,
-                            text: 'Confirm Password',
-                            validtor: (value) =>
-                                SignupValidator.validateConfirmPassword(
-                                    value, password.text),
-                            sufIcon: IconButton(
-                              onPressed: () => context
-                                  .read<ConfirmPasswordVisibilityCubit>()
-                                  .toggleVisibility(),
-                              icon: Icon(
-                                state2
-                                    ? CupertinoIcons.eye_slash_fill
-                                    : CupertinoIcons.eye_fill,
-                                color: Theme.of(context).primaryColor,
+                    FadeInLeft(
+                      duration: Duration(milliseconds: 700),
+                      child: AuthTextField(
+                          controller: userName,
+                          text: 'اسم المستخدم',
+                          validtor: (value) =>
+                              SignupValidator.validateUsername(value),
+                          sufIcon: Icon(
+                            Icons.person,
+                            color: Theme.of(context).primaryColor,
+                          )),
+                    ),
+                    SizedBox(height: size.height * 0.015),
+                    FadeInLeft(
+                      duration: Duration(milliseconds: 900),
+                      child: AuthTextField(
+                          controller: fullName,
+                          text: 'الاسم الكامل',
+                          validtor: (value) =>
+                              SignupValidator.validateFullName(value),
+                          sufIcon: Icon(
+                            Icons.person,
+                            color: Theme.of(context).primaryColor,
+                          )),
+                    ),
+                    SizedBox(height: size.height * 0.015),
+                    FadeInLeft(
+                      duration: Duration(milliseconds: 1100),
+                      child: BlocBuilder<PasswordVisibilityCubit, bool>(
+                        builder: (context, state) {
+                          return AuthTextField(
+                              scure: state,
+                              controller: password,
+                              validtor: (value) =>
+                                  SignupValidator.validatePassword(value),
+                              text: 'كلمة السر',
+                              preIcon: IconButton(
+                                onPressed: () => context
+                                    .read<PasswordVisibilityCubit>()
+                                    .toggleVisibility(),
+                                icon: AnimatedSwitcher(
+                                  duration: const Duration(microseconds: 300),
+                                  transitionBuilder: (child, animation) {
+                                    // you can choose FadeTransition, ScaleTransition, RotationTransition, etc.
+                                    return FadeTransition(
+                                        opacity: animation, child: child);
+                                  },
+                                  child: Icon(
+                                    state
+                                        ? CupertinoIcons.eye_slash_fill
+                                        : CupertinoIcons.eye_fill,
+                                    key: ValueKey<bool>(state),
+                                    color: Theme.of(context).primaryColor,
+                                  ),
+                                ),
                               ),
-                            ),
-                            preIcon: Icon(
-                              FluentIcons.key_16_filled,
-                              color: Theme.of(context).primaryColor,
-                            ));
-                      },
+                              sufIcon: Icon(
+                                FluentIcons.key_16_filled,
+                                color: Theme.of(context).primaryColor,
+                              ));
+                        },
+                      ),
+                    ),
+                    SizedBox(height: size.height * 0.015),
+                    FadeInLeft(
+                      duration: Duration(milliseconds: 1300),
+                      child: BlocBuilder<ConfirmPasswordVisibilityCubit, bool>(
+                        builder: (context, state2) {
+                          return AuthTextField(
+                              controller: confirmPassword,
+                              scure: state2,
+                              text: 'تأكيد كلمة السر',
+                              validtor: (value) =>
+                                  SignupValidator.validateConfirmPassword(
+                                      value, password.text),
+                              preIcon: IconButton(
+                                onPressed: () => context
+                                    .read<ConfirmPasswordVisibilityCubit>()
+                                    .toggleVisibility(),
+                                icon: Icon(
+                                  state2
+                                      ? CupertinoIcons.eye_slash_fill
+                                      : CupertinoIcons.eye_fill,
+                                  color: Theme.of(context).primaryColor,
+                                ),
+                              ),
+                              sufIcon: Icon(
+                                FluentIcons.key_16_filled,
+                                color: Theme.of(context).primaryColor,
+                              ));
+                        },
+                      ),
                     ),
                     SizedBox(height: size.height * 0.01),
                     _agreePolicy(context),
                     SizedBox(height: size.height * 0.01),
-                    BlocBuilder<PolicyCubit, PolicyState>(
-                        builder: (context, state) {
-                      return CustomPrimaryButton(
-                        ontap: () {
-                          if (_keySignup.currentState!.validate()) {
-                            if (!accepted) {
-                              context.read<PolicyCubit>().notAccept();
-                            } else {
-                              print('2');
-                              context.goNamed('phone',
-                                  extra: UserEnity(
-                                      email: email.text,
-                                      password: password.text,
-                                      username: userName.text,
-                                      fullName: fullName.text,
-                                      phone: '',
-                                      authProvider: ['local']));
+                    FadeInRight(
+                      duration: Duration(milliseconds: 1500),
+                      child: BlocBuilder<PolicyCubit, PolicyState>(
+                          builder: (context, state) {
+                        return CustomPrimaryButton(
+                          ontap: () {
+                            if (_keySignup.currentState!.validate()) {
+                              if (!accepted) {
+                                context.read<PolicyCubit>().notAccept();
+                              } else {
+                                print('2');
+                                context.pushNamed('phone',
+                                    extra: UserRequestEnity(
+                                        email: email.text,
+                                        password: password.text,
+                                        username: userName.text,
+                                        fullName: fullName.text,
+                                        phone: '',
+                                        authProvider: ['local']));
+                              }
                             }
-                          }
-                        },
-                        color: Theme.of(context).primaryColor,
-                        height: 39.23431396484375,
-                        width: size.width,
-                        text: 'التالي',
-                      );
-                    }),
+                          },
+                          color: Theme.of(context).primaryColor,
+                          height: 45,
+                          width: size.width,
+                          text: 'التالي',
+                        );
+                      }),
+                    ),
                     SizedBox(height: size.height * 0.02),
                     _haveAccount(context),
                     SizedBox(height: size.height * 0.04),
@@ -261,9 +289,9 @@ class _SignupPageState extends State<SignupPage> {
                     border: Border.all(
                         color: Theme.of(context).primaryColor, width: 4)),
                 child: Checkbox(
-                  shape: RoundedRectangleBorder(
+                  shape: const RoundedRectangleBorder(
                       // borderRadius: BorderRadius.circular(5),
-                      side: const BorderSide(color: Colors.black, width: 2)),
+                      side: BorderSide(color: Colors.black, width: 2)),
                   fillColor: WidgetStatePropertyAll(
                       Theme.of(context).colorScheme.onBackground),
                   value: accepted,
@@ -281,7 +309,7 @@ class _SignupPageState extends State<SignupPage> {
         return Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Text('الموافقة على سياسة الخصوصية',
+            const Text('الموافقة على سياسة الخصوصية',
                 textAlign: TextAlign.left,
                 style: TextStyle(
                     color: Colors.red,
@@ -297,9 +325,9 @@ class _SignupPageState extends State<SignupPage> {
                   color: Theme.of(context).colorScheme.onBackground,
                   border: Border.all(color: Colors.red, width: 4)),
               child: Checkbox(
-                shape: RoundedRectangleBorder(
+                shape: const RoundedRectangleBorder(
                     // borderRadius: BorderRadius.circular(5),
-                    side: const BorderSide(color: Colors.black, width: 2)),
+                    side: BorderSide(color: Colors.black, width: 2)),
                 fillColor: WidgetStatePropertyAll(
                     Theme.of(context).colorScheme.onBackground),
                 value: accepted,

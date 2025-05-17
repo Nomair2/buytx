@@ -21,6 +21,7 @@ class CustomPrimaryButton extends StatelessWidget {
       child: Container(
         width: width,
         height: height,
+        padding: EdgeInsets.symmetric(vertical: 5),
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
@@ -41,7 +42,11 @@ class CustomPrimaryButton extends StatelessWidget {
                       color: Colors.white,
                     ),
                   )
-                : Text(text, style: Theme.of(context).textTheme.bodyMedium)),
+                : Text(text,
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyMedium!
+                        .copyWith(fontSize: 18))),
       ),
     );
   }

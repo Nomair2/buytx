@@ -4,18 +4,21 @@ import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:marabh/core/common/widgets/custom_primary_button.dart';
 import 'package:marabh/core/configs/assets/app_image.dart';
 import 'package:marabh/core/error/show_error.dart';
-import 'package:marabh/src/auth/domain/entity/user.dart';
+import 'package:marabh/core/services/route/router.dart';
+import 'package:marabh/src/auth/domain/entity/userRequest.dart';
 import 'package:marabh/src/auth/presentation/bloc/auth/auth_bloc.dart';
 import 'package:marabh/src/auth/presentation/bloc/auth/auth_event.dart';
 import 'package:marabh/src/auth/presentation/bloc/auth/auth_state.dart';
 import 'package:go_router/go_router.dart';
+import 'package:country_picker/country_picker.dart';
+import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
 
 class PhonePage extends StatefulWidget {
   PhonePage(
     this.user, {
     super.key,
   });
-  UserEnity user;
+  UserRequestEnity user;
 
   @override
   State<PhonePage> createState() => _PhonePageState();
@@ -26,18 +29,51 @@ class _PhonePageState extends State<PhonePage> {
   late GlobalKey<FormState> _keyPhone;
   int countryNumberLenght = 10;
   late TextEditingController phone;
+  late TextEditingController countryField;
   @override
   void initState() {
     // TODO: implement initState
     _keyPhone = GlobalKey<FormState>();
     phone = TextEditingController();
+    countryField = TextEditingController();
   }
 
   @override
   void dispose() {
     phone.clear();
+    countryField.clear();
     // TODO: implement dispose
     super.dispose();
+  }
+
+  final OutlineInputBorder _inputBorder = OutlineInputBorder(
+    borderRadius: BorderRadius.circular(30),
+    borderSide: const BorderSide(color: Colors.white, width: 2),
+  );
+
+  void _pickCountry(BuildContext context) {
+    showCountryPicker(
+      context: context,
+      countryListTheme: CountryListThemeData(
+          bottomSheetHeight: MediaQuery.of(context).size.height * 0.4,
+          searchTextStyle: const TextStyle(color: Colors.white),
+          inputDecoration: InputDecoration(
+            iconColor: Colors.white,
+            border: _inputBorder,
+            contentPadding: const EdgeInsets.symmetric(horizontal: 20),
+            focusedBorder: _inputBorder,
+          )),
+      showPhoneCode: true,
+      moveAlongWithKeyboard: true,
+      onSelect: (Country country) {
+        countryField.text = country.displayName;
+        print(country.flagEmoji);
+        print(country.countryCode);
+        // setState(() {
+        //   selectedCountry = country;
+        // });
+      },
+    );
   }
 
   @override
@@ -55,7 +91,7 @@ class _PhonePageState extends State<PhonePage> {
                 _buildTitle(context),
                 SizedBox(height: size.height * 0.01),
                 _buildImage(),
-                SizedBox(height: size.height * 0.15),
+                SizedBox(height: size.height * 0.05),
                 IntlPhoneField(
                   controller: phone,
                   dropdownIcon: const Icon(
@@ -64,11 +100,11 @@ class _PhonePageState extends State<PhonePage> {
                     color: Color(0xff72B745),
                   ),
                   validator: (p0) {
-                    print("form validator");
-                    print(p0!.number.length);
-                    print(p0.completeNumber.length);
-                    print(countryNumberLenght);
-                    if (p0.number == "") {
+                    // print("form validator");
+                    // print(p0!.number.length);
+                    // print(p0.completeNumber.length);
+                    // print(countryNumberLenght);
+                    if (p0!.number == "") {
                       return "Mobile Number is required";
                     }
                     //  else if (p0.completeNumber.length !=
@@ -87,7 +123,7 @@ class _PhonePageState extends State<PhonePage> {
                       fontSize: 16,
                       fontWeight: FontWeight.w500),
                   cursorColor: Theme.of(context).colorScheme.onBackground,
-                  autovalidateMode: AutovalidateMode.disabled,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
                   decoration: InputDecoration(
                     filled: true,
                     fillColor: Theme.of(context).colorScheme.onBackground,
@@ -160,7 +196,8 @@ class _PhonePageState extends State<PhonePage> {
                       context.read<AuthBloc>().add(AuthInitEvent());
                     }
                     if (state is AuthSuccess) {
-                      context.goNamed('login');
+                      context.goNamed('verify-otp',
+                          extra: VerifyOtpParameter(widget.user.email!, false));
                     }
                   },
                 ),

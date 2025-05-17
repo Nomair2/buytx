@@ -5,8 +5,12 @@ import 'package:marabh/core/configs/theme/app_text.dart';
 class AppTheme {
   static final lightTheme = ThemeData(
     primaryColor: AppColors.lightPrimary,
+
+    fontFamily: 'Hacen Tunisia',
     scaffoldBackgroundColor: AppColors.lightBackground,
+
     colorScheme: ColorScheme.dark(
+        onSurface: Color(0xffE8ECE8),
         onSecondary: Colors.black,
         onBackground: AppColors.lightButton,
         brightness: Brightness.light,
@@ -44,10 +48,12 @@ class AppTheme {
   );
 
   static final darkTheme = ThemeData(
+    fontFamily: 'Hacen Tunisia',
     primaryColor: AppColors.darkPrimary,
     scaffoldBackgroundColor: AppColors.darkBackground,
     textTheme: AppText.darkText,
     colorScheme: ColorScheme.dark(
+        onSurface: AppColors.darkBackground,
         onSecondary: Colors.white,
         onBackground: AppColors.darkButton,
         brightness: Brightness.dark,

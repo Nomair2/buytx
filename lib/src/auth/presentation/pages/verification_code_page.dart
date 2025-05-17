@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -5,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:marabh/core/common/widgets/custom_primary_button.dart';
 import 'package:marabh/core/configs/assets/app_image.dart';
 import 'package:marabh/core/error/show_error.dart';
+import 'package:marabh/core/services/route/router.dart';
 import 'package:marabh/src/auth/presentation/bloc/auth/auth_bloc.dart';
 import 'package:marabh/src/auth/presentation/bloc/auth/auth_event.dart';
 import 'package:marabh/src/auth/presentation/bloc/auth/auth_state.dart';
@@ -13,8 +15,10 @@ import 'package:marabh/src/home/widgets/customCircularButton.dart';
 import 'package:pinput/pinput.dart';
 
 class VerificationCodePage extends StatelessWidget {
-  VerificationCodePage({super.key, required this.email});
-  final String email;
+  VerificationCodePage({super.key, required this.parameter});
+  // final String email;
+  // final bool isForgetPassword;
+  final VerifyOtpParameter parameter;
   // String? otp;
 
   TextEditingController otp = TextEditingController();
@@ -62,48 +66,53 @@ class VerificationCodePage extends StatelessWidget {
                     },
                   ),
                   SizedBox(height: size.height * 0.05),
-                  BlocConsumer<AuthBloc, AuthState>(
-                    builder: (context, state) {
-                      print("we started ");
-                      if (state is AuthLoading) {
-                        print("we loading ");
+                  FadeInRight(
+                    duration: Duration(milliseconds: 800),
+                    child: BlocConsumer<AuthBloc, AuthState>(
+                      builder: (context, state) {
+                        print("we started ");
+                        if (state is AuthLoading) {
+                          print("we loading ");
+                          return CustomPrimaryButton(
+                            ontap: () {},
+                            color: Theme.of(context).primaryColor,
+                            height: 45,
+                            width: size.width * 0.8,
+                            text: '',
+                          );
+                        }
                         return CustomPrimaryButton(
-                          ontap: () {},
+                          ontap: () {
+                            print(parameter.email);
+                            print(otp == null);
+                            print(parameter.email == null);
+                            print(otp);
+                            print("1");
+                            if (_keyOtp.currentState!.validate()) {
+                              print("2");
+                              context.read<AuthBloc>().add(AuthVerifyOtpEvent(
+                                  otp: otp.text, email: parameter.email));
+                            }
+                            print("3");
+                            // context.go('/auth/new-password');
+                          },
                           color: Theme.of(context).primaryColor,
-                          height: 39.23431396484375,
+                          height: 45,
                           width: size.width * 0.8,
-                          text: '',
+                          text: 'تحقق',
                         );
-                      }
-                      return CustomPrimaryButton(
-                        ontap: () {
-                          print(email);
-                          print(otp == null);
-                          print(email == null);
-                          print(otp);
-                          print("1");
-                          if (_keyOtp.currentState!.validate()) {
-                            print("2");
-                            context.read<AuthBloc>().add(AuthVerifyOtpEvent(
-                                otp: otp.text, email: email));
-                          }
-                          print("3");
-                          // context.go('/auth/new-password');
-                        },
-                        color: Theme.of(context).primaryColor,
-                        height: 39.23431396484375,
-                        width: size.width * 0.8,
-                        text: 'تحقق',
-                      );
-                    },
-                    listener: (context, state) {
-                      if (state is AuthError) {
-                        context.read<AuthBloc>().add(AuthInitEvent());
-                        showError(state.message);
-                      } else if (state is AuthSuccess) {
-                        context.goNamed('new-password');
-                      }
-                    },
+                      },
+                      listener: (context, state) {
+                        if (state is AuthError) {
+                          context.read<AuthBloc>().add(AuthInitEvent());
+                          showError(state.message);
+                        } else if (state is AuthSuccess) {
+                          parameter.isForgetPassword
+                              ? context.goNamed('new-password')
+                              : context.goNamed('login');
+                        }
+                      },
+                    ),
                   ),
                   SizedBox(height: size.height * 0.02),
                   haveCode(context),
@@ -158,30 +167,33 @@ class VerificationCodePage extends StatelessWidget {
         borderRadius: BorderRadius.circular(6.53),
       ),
     );
-    return Pinput(
-      length: 5,
-      defaultPinTheme: defaultPinTheme,
-      // autovalidateMode: AutovalidateMode.disabled,
-      errorPinTheme: errorPinTheme,
-      // focusedPinTheme: focusedPinTheme,
-      submittedPinTheme: submittedPinTheme,
-      // keyboardAppearance: Brightness.dark,
-      controller: otp,
-      // key: _keyOtp,
-      closeKeyboardWhenCompleted: true,
-      disabledPinTheme: errorPinTheme,
-      validator: (s) {
-        print(s!.length);
-        if (s!.length == 5) {
-          return null;
-        } else {
-          return 'ojij';
-        }
-        // return s == '22222' ? null : 'Pin is incorrect';
-      },
-      pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
-      showCursor: true,
-      onCompleted: (pin) => print(pin),
+    return FadeInLeft(
+      duration: Duration(milliseconds: 500),
+      child: Pinput(
+        length: 5,
+        defaultPinTheme: defaultPinTheme,
+        // autovalidateMode: AutovalidateMode.disabled,
+        errorPinTheme: errorPinTheme,
+        // focusedPinTheme: focusedPinTheme,
+        submittedPinTheme: submittedPinTheme,
+        // keyboardAppearance: Brightness.dark,
+        controller: otp,
+        // key: _keyOtp,
+        closeKeyboardWhenCompleted: true,
+        disabledPinTheme: errorPinTheme,
+        validator: (s) {
+          print(s!.length);
+          if (s!.length == 5) {
+            return null;
+          } else {
+            return '';
+          }
+          // return s == '22222' ? null : 'Pin is incorrect';
+        },
+        pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
+        showCursor: true,
+        onCompleted: (pin) => print(pin),
+      ),
     );
   }
 
@@ -192,7 +204,7 @@ class VerificationCodePage extends StatelessWidget {
         CustomSmallButton(
             icons: Icons.arrow_back_ios_new,
             onPressed: () {
-              context.go('/auth/forgot-password');
+              context.pop();
             },
             colors: Colors.white,
             radius: 12,
@@ -248,7 +260,7 @@ class VerificationCodePage extends StatelessWidget {
                             print("OTP resent");
                             String? response = await context
                                 .read<TimerCubit>()
-                                .resetTimer(email);
+                                .resetTimer(parameter.email);
                             if (response != null) {
                               showError(response);
                             }

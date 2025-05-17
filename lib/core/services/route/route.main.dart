@@ -4,11 +4,11 @@ final GoRouter router = GoRouter(
   debugLogDiagnostics: true,
   initialLocation: '/',
   routes: [
-    GoRoute(
-      path: '/',
-      name: 'splash',
-      builder: (context, state) => SplashPage(),
-    ),
+    // GoRoute(
+    //   path: '/',
+    //   name: 'splash',
+    //   builder: (context, state) => SplashPage(),
+    // ),
     GoRoute(
       path: '/auth/phone',
       name: 'phone',
@@ -16,7 +16,7 @@ final GoRouter router = GoRouter(
         context,
         state,
       ) {
-        UserEnity user = state.extra as UserEnity;
+        UserRequestEnity user = state.extra as UserRequestEnity;
 
         return PhonePage(user);
       },
@@ -34,54 +34,41 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: '/auth/forgot-password',
       name: 'forgot-password',
-      builder: (context, state) => const ForgetPasswordPage(),
+      builder: (context, state) => ForgetPasswordPage(),
     ),
     GoRoute(
       path: '/auth/verify-otp',
       name: 'verify-otp',
-      builder: (context, state) =>
-          VerificationCodePage(email: state.extra as String),
+      builder: (context, state) => VerificationCodePage(
+        parameter: state.extra as VerifyOtpParameter,
+      ),
     ),
     GoRoute(
-      // path: '/auth/reset-password/:token',
       path: '/auth/new-password',
       name: 'new-password',
       builder: (context, state) {
-        // final token = state.pathParameters['token']!;
-        // return ResetPasswordPage(token: token);
         return NewPasswordPage();
       },
     ),
+    GoRoute(
+      path: '/',
+      name: 'chatsScreen',
+      builder: (context, state) => AllChatPage(),
+    ),
+    GoRoute(
+        path: '/messges',
+        name: 'messageScreen',
+        builder: (context, state) => BlocProvider(
+              create: (context) => SocketBloc()..add(ConnectSocket()),
+              child: MessagesScreen(
+                id: state.extra as String,
+              ),
+            )),
   ],
 );
 
-
-// final router =
-//     GoRouter(debugLogDiagnostics: true, initialLocation: '/', routes: [
-//   GoRoute(
-//     path: '/',
-// redirect: (context, state) {
-//   final cacheHelper = sl<CacheHelper>()
-//     ..getSessionToken()
-//     ..getUserId();
-//   // isn't the first time but he log out
-//   if ((Cache.instance.sessionToken == null ||
-//           Cache.instance.idUser == null) &&
-//       !cacheHelper.isFirstTime()) {
-//     return LoginPage.path;
-//   }
-//   if (state.extra == 'home') return HomePage.path;
-//   return null;
-// },
-// builder: (context, state) => SignupPage(),
-// builder: (context, state) {
-//   final cacheHelper = sl<CacheHelper>()
-//     ..getSessionToken()
-//     ..getUserId();
-//   if (cacheHelper.isFirstTime()) {
-//     return const SplashPage();
-//   }
-//   return const SplashPage();
-// },
-//   )
-// ]);
+class VerifyOtpParameter {
+  String email;
+  bool isForgetPassword;
+  VerifyOtpParameter(this.email, this.isForgetPassword);
+}

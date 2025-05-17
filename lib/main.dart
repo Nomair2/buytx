@@ -5,6 +5,7 @@ import 'package:marabh/core/services/injection_container.dart';
 import 'package:marabh/core/services/route/router.dart';
 import 'package:marabh/src/auth/presentation/bloc/auth/auth_bloc.dart';
 import 'package:marabh/src/auth/presentation/bloc/auth/auth_event.dart';
+import 'package:marabh/src/chat/presentaion/pages/all_chat_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

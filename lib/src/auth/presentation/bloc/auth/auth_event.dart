@@ -32,6 +32,12 @@ class AuthVerifyAccountEvent extends AuthEvent {
   AuthVerifyAccountEvent(this.email);
 }
 
+class AuthReVerifyAccountEvent extends AuthEvent {
+  final String email;
+
+  AuthReVerifyAccountEvent(this.email);
+}
+
 class AuthVerifyOtpEvent extends AuthEvent {
   final String email;
   final String otp;

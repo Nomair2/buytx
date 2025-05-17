@@ -5,6 +5,7 @@ final sl = GetIt.instance;
 Future<void> init() async {
   await _cacheInit();
   await _authInit();
+  await _chatInit();
 }
 
 Future<void> _authInit() async {
@@ -17,6 +18,16 @@ Future<void> _authInit() async {
         () => AuthRemoteDataSourceImp(sl()))
     ..registerLazySingleton<AuthRepository>(() => AuthRepositoryImp(sl()))
     ..registerLazySingleton(http.Client.new);
+}
+
+Future<void> _chatInit() async {
+  sl
+    ..registerLazySingleton(() => GetChatsUseCase(sl()))
+    ..registerLazySingleton(() => GetMessagesUseCase(sl()))
+    ..registerLazySingleton<ChatRemoteDataSource>(
+        () => ChatRemoteDataSourceImp(sl()))
+    ..registerLazySingleton<ChatRepository>(() => ChatRepositoryImp(sl()));
+  // ..registerLazySingleton(http.Client.new);
 }
 
 Future<void> _cacheInit() async {
