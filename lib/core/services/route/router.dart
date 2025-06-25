@@ -12,6 +12,10 @@ import 'package:marabh/src/auth/presentation/pages/splash_page.dart';
 import 'package:marabh/src/auth/presentation/pages/verification_code_page.dart';
 import 'package:marabh/src/home/pages/home_page.dart';
 
+import '../../../src/product/presentation/pages/policy_page.dart';
+import '../../../src/product/presentation/pages/product_detail_page1.dart';
+import '../../../src/product/presentation/pages/product_detail_page2.dart';
+import '../../../src/product/presentation/pages/upload_product_image_page.dart';
 import '../../../src/profile/presentation/pages/create_window.dart';
 import '../../../src/profile/presentation/pages/dealer_profile_view.dart';
 import '../../../src/profile/presentation/pages/edit_password_Screen.dart';

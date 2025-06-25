@@ -8,7 +8,7 @@ final GoRouter router = GoRouter(
       path: '/',
       name: 'splash',
       // builder: (context, state) => SplashPage(),
-      builder: (context, state) => const HomePage(),
+      builder: (context, state) => const PolicyPage(),
     ),
     //---
     GoRoute(
@@ -101,6 +101,38 @@ final GoRouter router = GoRouter(
       name: 'dealer_profile',
       builder: (context, state) {
         return const DealerProfileView();
+      },
+    ),
+    //---
+    // GoRoute(
+    //   path: '/policyPage',
+    //   name: 'policyPage',
+    //   builder: (context, state) {
+    //     return const PolicyPage();
+    //   },
+    // ),
+    // //---
+    GoRoute(
+      path: '/productDetail1',
+      name: 'productDetail1',
+      builder: (context, state) {
+        return const ProductDetailPage1();
+      },
+    ),
+    //---
+    GoRoute(
+      path: '/productImage',
+      name: 'productImage',
+      builder: (context, state) {
+        return const UploadProductImagePage();
+      },
+    ),
+    //---
+    GoRoute(
+      path: '/productDetail2',
+      name: 'productDetail2',
+      builder: (context, state) {
+        return const ProductDetailPage2();
       },
     ),
     //---

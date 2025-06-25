@@ -2,6 +2,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/common/widgets/custom_primary_button.dart';
+import '../../../../core/common/widgets/custom_text_field.dart';
 import '../../../../core/configs/assets/app_image.dart';
 import '../widgets/more_button.dart';
 
@@ -104,8 +105,10 @@ class _CreateWindowState extends State<CreateWindow> {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 12),
                     child: Material(
-                      child:
-                          CustomTextField(windowController: windowController),
+                      child: CustomTextField(
+                        windowController: windowController,
+                        title: "مثال عن المتجر",
+                      ),
                     ),
                   ),
                 ),
@@ -128,6 +131,7 @@ class _CreateWindowState extends State<CreateWindow> {
                     padding: const EdgeInsets.symmetric(horizontal: 12),
                     child: Material(
                       child: CustomTextFieldArea(
+                          hint: "اكتب تفاصيل النافذة",
                           windowController: windowContentController),
                     ),
                   ),
@@ -228,59 +232,26 @@ class _CreateWindowState extends State<CreateWindow> {
 //=======
 }
 
-class CustomTextField extends StatelessWidget {
-  const CustomTextField({
-    super.key,
-    required this.windowController,
-  });
-
-  final TextEditingController windowController;
-
-  @override
-  Widget build(BuildContext context) {
-    return TextField(
-      controller: windowController,
-      decoration: InputDecoration(
-        hintText: "مثال عن المتجر",
-        hintStyle: Theme.of(context).textTheme.bodySmall,
-        hintTextDirection: TextDirection.rtl,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(20),
-          borderSide:
-              BorderSide(color: Theme.of(context).colorScheme.onSecondary),
-        ),
-        enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20),
-            borderSide: BorderSide(
-              color: Theme.of(context).colorScheme.onSecondary,
-            )),
-        focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20),
-            borderSide: BorderSide(
-              color: Theme.of(context).colorScheme.onSecondary,
-            )),
-      ),
-    );
-  }
-}
-
 //======
 class CustomTextFieldArea extends StatelessWidget {
   const CustomTextFieldArea({
     super.key,
     required this.windowController,
+    required this.hint,
   });
 
   final TextEditingController windowController;
+  final String hint;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: windowController,
+      style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary),
       // maxLength: 4,
       maxLines: 6,
       decoration: InputDecoration(
-        hintText: "اكتب تفاصيل النافذة",
+        hintText: hint,
         hintStyle: Theme.of(context).textTheme.bodySmall,
         hintTextDirection: TextDirection.rtl,
         border: OutlineInputBorder(
